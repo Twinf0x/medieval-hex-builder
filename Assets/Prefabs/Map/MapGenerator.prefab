@@ -45,10 +45,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSize: 5
   ySize: 5
-  grasslandPrefab: {fileID: 0}
-  forestPrefab: {fileID: 0}
-  mountainPrefab: {fileID: 0}
-  oceanPrefab: {fileID: 7177012790920355997, guid: a8d9eab4940e11c40940cce9a47cc987,
+  zSize: 5
+  numberOfForests: 3
+  maxForestSize: 8
+  minForestSize: 4
+  numberOfMountainranges: 3
+  maxMountainrangeSize: 8
+  minMountainrangeSize: 4
+  grasslandPrefab: {fileID: 7177012790920355997, guid: a8d9eab4940e11c40940cce9a47cc987,
+    type: 3}
+  forestPrefab: {fileID: 7177012790920355997, guid: a4902f685152d134a98c9b01f1ffda05,
+    type: 3}
+  mountainPrefab: {fileID: 7177012790920355997, guid: 3b1e1c626b3ef77459f60990da19e564,
+    type: 3}
+  oceanPrefab: {fileID: 7177012790920355997, guid: 10d290e9de0256f42b666819251ec7c5,
     type: 3}
   mapPrefab: {fileID: 1532768791067977172, guid: 4d8032f74076bf741bada8a62c6137fa,
     type: 3}

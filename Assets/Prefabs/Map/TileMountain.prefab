@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2995111527360239363}
   - component: {fileID: 677465955550327220}
   m_Layer: 0
-  m_Name: PlaceholderTileWhite
+  m_Name: TileMountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -507916351
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3f26fb63254e5004d967d74d98421675, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06e193dd13064654980ce6eb46384d23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e07510d2b9e1e4a923778b3fd35ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   hoverMarker: {fileID: 2923478607794111558}
+  coordinates: {x: 0, y: 0}
   placedBuilding: {fileID: 0}
 --- !u!60 &677465955550327220
 PolygonCollider2D:

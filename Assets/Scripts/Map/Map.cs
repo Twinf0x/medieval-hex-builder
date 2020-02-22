@@ -1,82 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    private int xSize;
-    private int ySize;
-    private Tile[,] tiles;
+    Dictionary<Vector2, Tile> tiles;
 
-    public void SetSize(int x, int y)
+    public void Initialize()
     {
-        xSize = x;
-        ySize = y;
-        tiles = new Tile[x, y];
+        tiles = new Dictionary<Vector2, Tile>();
     }
 
-    public Tile GetTile(int x, int y)
+    public Tile GetTile(Vector2 coordinates)
     {
-        if(!coordinatesAreValid(x, y))
+        if(!coordinatesAreValid(coordinates))
         {
             return null;
         }
 
-        return tiles[x, y];
+        return tiles[coordinates];
     }
 
-    private bool coordinatesAreValid(int x, int y)
+    private bool coordinatesAreValid(Vector2 coordinates)
     {
-        if(x >= tiles.GetLength(0))
-        {
-            Debug.LogWarning($"Trying to access x-index \"{x}\" of the map, but it is out of bounds.");
-            return false;
-        }
-
-        if(y >= tiles.GetLength(1))
-        {
-            Debug.LogWarning($"Trying to access y-index \"{y}\" of the map, but it is out of bounds.");
-            return false;
-        }
-
-        return true;
+        return tiles.ContainsKey(coordinates);
     }
 
-    public void ReplaceTile(int x, int y, Tile replacement) 
+    public void ReplaceTile(Vector2 coordinates, Tile replacement) 
     {
-        if(!coordinatesAreValid(x, y))
+        if(!coordinatesAreValid(coordinates))
         {
             return;
         }
 
-        RemoveTile(x, y);
-        PlaceTile(x, y, replacement);
+        RemoveTile(coordinates);
+        PlaceTile(coordinates, replacement);
     }
 
-    public void RemoveTile(int x, int y)
+    public void RemoveTile(Vector2 coordinates)
     {
-        if(!coordinatesAreValid(x, y))
+        if(!coordinatesAreValid(coordinates))
         {
             return;
         }
 
-        Destroy(tiles[x, y].gameObject);
-        tiles[x, y] = null;
+        Destroy(tiles[coordinates].gameObject);
+        tiles.Remove(coordinates);
     }
 
-    public void PlaceTile(int x, int y, Tile tile)
+    public void PlaceTile(Vector2 coordinates, Tile tile)
     {
-        if(!coordinatesAreValid(x, y))
-        {
-            return;
-        }
-
-        float xPos = (x + y) * HexMetrics.xOffset;
-        float yPos  = (x - y) * HexMetrics.yOffset;
+        float xPos = (coordinates.x + coordinates.y) * HexMetrics.xOffset;
+        float yPos  = (coordinates.x - coordinates.y) * HexMetrics.yOffset;
         tile.transform.position = new Vector3(xPos, yPos, 0f);
 
-        tiles[x, y] = tile;
-        tile.coordinates = new Vector2(x, y);
+        if(tiles.ContainsKey(coordinates))
+        {
+            RemoveTile(coordinates);
+        }
+        tiles.Add(coordinates, tile);
+        tile.coordinates = coordinates;
     }
 
     public void PlaceTileGroup(int minTileAmount, int maxTileAmount, GameObject tilePrefab)
@@ -88,12 +72,15 @@ public class Map : MonoBehaviour
         {
             GameObject tileObject = Instantiate(tilePrefab);
             Tile tile = tileObject.GetComponent<Tile>();
-            ReplaceTile(position.x, position.y, tile);
+            PlaceTile(position, tile);
         }
     }
 
     private List<Vector2> GetGroupPositions(int groupSize)
     {
+        List<Vector2> result = new List<Vector2>();
+        Vector2 startPosition = Helpers.RandomKeys(tiles).FirstOrDefault();
 
+        return result;
     }
 }

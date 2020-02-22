@@ -7,6 +7,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Map Settings")]
     public int xSize = 0;
     public int ySize = 0;
+    public int zSize = 0;
+    public int oceanOffset = 3;
     public int numberOfForests = 3;
     public int maxForestSize = 8;
     public int minForestSize = 4;
@@ -25,23 +27,51 @@ public class MapGenerator : MonoBehaviour
 
     private void Start() 
     {
-        CreateMap(xSize, ySize);
+        CreateOcean();
+        CreateMap(xSize, ySize, zSize, grasslandPrefab);
     }
 
-    public Map CreateMap(int xSize, int ySize)
+    public Map CreateMap(int xSize, int ySize, int zSize, GameObject basePrefab)
     {
         GameObject mapObject = Instantiate(mapPrefab);
         Map map = mapObject.GetComponent<Map>();
-        map.SetSize(xSize, ySize);
+        map.Initialize();
 
+        //Create Base
         for(int x = 0; x < xSize; x++)
         {
             for(int y = 0; y < ySize; y++)
             {
-                GameObject tileObject = Instantiate(oceanPrefab);
+                GameObject tileObject = Instantiate(basePrefab);
                 tileObject.transform.SetParent(mapObject.transform);
                 Tile tile = tileObject.GetComponent<Tile>();
-                map.PlaceTile(x, y, tile);
+                Vector2 coordinates = new Vector2(x, y);
+                map.PlaceTile(coordinates, tile);
+            }
+        }
+
+        //Create Rows with Z-Offset
+        for(int z = 0; z < zSize; z++)
+        {
+            int xOffset = z;
+            int yOffset = -1 * z;
+
+            for(int x = 0; x < xSize; x++)
+            {
+                GameObject tileObject = Instantiate(basePrefab);
+                tileObject.transform.SetParent(mapObject.transform);
+                Tile tile = tileObject.GetComponent<Tile>();
+                Vector2 coordinates = new Vector2(x + xOffset, yOffset);
+                map.PlaceTile(coordinates, tile);
+            }
+
+            for(int y = 0; y < ySize; y++)
+            {
+                GameObject tileObject = Instantiate(basePrefab);
+                tileObject.transform.SetParent(mapObject.transform);
+                Tile tile = tileObject.GetComponent<Tile>();
+                Vector2 coordinates = new Vector2(xSize - 1 + xOffset, y + yOffset);
+                map.PlaceTile(coordinates, tile);
             }
         }
 
@@ -56,5 +86,13 @@ public class MapGenerator : MonoBehaviour
         }
 
         return map;
+    }
+
+    public Map CreateOcean()
+    {
+        Map oceanMap = CreateMap(xSize + oceanOffset, ySize + oceanOffset, zSize + oceanOffset, oceanPrefab);
+        oceanMap.transform.Translate(-1 * HexMetrics.xOffset * oceanOffset, -1 * HexMetrics.yOffset * oceanOffset, 0);
+
+        return oceanMap;
     }
 }

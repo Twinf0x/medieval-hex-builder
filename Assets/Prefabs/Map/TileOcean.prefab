@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2733417254740552298}
   - component: {fileID: 2995111527360239363}
   m_Layer: 0
-  m_Name: PlaceholderTileOcean
+  m_Name: TileOcean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,10 +99,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 355696207
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4e16d6b45a66f214ab761c601c65da93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6972cf4f8793b724281d53c9a586e627, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,5 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e07510d2b9e1e4a923778b3fd35ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   hoverMarker: {fileID: 1990454248583023847}
+  coordinates: {x: 0, y: 0}
   placedBuilding: {fileID: 0}
