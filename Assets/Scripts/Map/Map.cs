@@ -6,7 +6,12 @@ public class Map : MonoBehaviour
 {
     public Tile[,] tiles;
 
-    private bool coordinatesAreValid(int x, int y, int z)
+    public void SetSize(int x, int y)
+    {
+        tiles = new Tile[x, y];
+    }
+
+    private bool coordinatesAreValid(int x, int y)
     {
         if(x >= tiles.GetLength(0))
         {
@@ -52,8 +57,9 @@ public class Map : MonoBehaviour
             return;
         }
 
-        float xPos = (x + y) * (HexMetrics.width * 1.5f);
-        float yPos  = (x * HexMetrics.height) - (y * HexMetrics.height);
+        float xPos = (x + y) * HexMetrics.xOffset;
+        float yPos  = (x - y) * HexMetrics.yOffset;
+        tile.transform.position = new Vector3(xPos, yPos, 0f);
         tiles[x, y] = tile;
     }
 }
