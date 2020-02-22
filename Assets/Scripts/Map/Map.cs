@@ -98,7 +98,6 @@ public class Map : MonoBehaviour
             {
                 if(++failures > maxFailures)
                 {
-                    Debug.Log("Couldn't find enough group Positions");
                     break;
                 }
             }

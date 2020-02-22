@@ -7,9 +7,9 @@ using Random = System.Random;
 
 public static class Helpers
 {
+    private static Random rand = new Random();
     public static IEnumerable<TValue> RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
     {
-        Random rand = new Random();
         List<TValue> values = Enumerable.ToList(dict.Values);
         int size = dict.Count;
         while(true)
@@ -20,7 +20,6 @@ public static class Helpers
 
     public static IEnumerable<TKey> RandomKeys<TKey, TValue>(IDictionary<TKey, TValue> dict)
     {
-        Random rand = new Random();
         List<TKey> keys = Enumerable.ToList(dict.Keys);
         int size = dict.Count;
         while(true)
