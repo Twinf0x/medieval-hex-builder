@@ -35,15 +35,22 @@ public class MapGenerator : MonoBehaviour
     [Header("Map Prefab")]
     public GameObject mapPrefab;
 
+    [HideInInspector]
+    public Vector2 viewPortOffset;
+
     private void Start() 
     {
-        Map oceanMap = CreateOcean();
-        MoveMapIntoViewport(oceanMap, ySize, paddingAroundIsland);
-        Vector2 mapSize = calculateMapSizeForCamera(xSize, ySize, zSize, paddingAroundIsland);
+        viewPortOffset = CalculateViewportOffset(ySize, paddingAroundIsland);
+        Vector2 mapSize = CalculateMapSizeForCamera(xSize, ySize, zSize, paddingAroundIsland);
         CameraController.instance.SetMapSize(mapSize);
+        CameraController.instance.CenterCamera(viewPortOffset);
+
+        Map oceanMap = CreateOcean();
+        oceanMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
+
         Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
         AddMapFeatures(islandMap);
-        MoveMapIntoViewport(islandMap, ySize, paddingAroundIsland);
+        islandMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
     }
 
     public Map CreateMap(int xSize, int ySize, int zSize, GameObject basePrefab)
@@ -99,7 +106,7 @@ public class MapGenerator : MonoBehaviour
         {
             map.PlaceTileGroup(minMountainrangeSize, maxMountainrangeSize, mountainPrefab);
         }
-        
+
         for(int i = 0; i < numberOfForests; i++)
         {
             map.PlaceTileGroup(minForestSize, maxForestSize, forestPrefab);
@@ -114,7 +121,7 @@ public class MapGenerator : MonoBehaviour
         return oceanMap;
     }
 
-    private Vector2 calculateMapSizeForCamera(int x, int y, int z, float padding)
+    private Vector2 CalculateMapSizeForCamera(int x, int y, int z, float padding)
     {
         float width = (x + y) * HexMetrics.xOffset;
         width += HexMetrics.totalWidthInUnits;
@@ -126,10 +133,11 @@ public class MapGenerator : MonoBehaviour
         return new Vector2(width, height);
     }
 
-    private void MoveMapIntoViewport(Map map, int y, float padding)
+    private Vector2 CalculateViewportOffset(int y, float padding)
     {
         float xOffset = HexMetrics.xOffset + padding;
         float yOffset = (y * HexMetrics.yOffset) + padding;
-        map.transform.Translate(xOffset, yOffset, 0);
+
+        return new Vector2(xOffset, yOffset);
     }
 }

@@ -33,7 +33,6 @@ public class CameraController : MonoBehaviour
             mainCamera = gameObject.GetComponent<Camera>();
             desiredSize = mainCamera.orthographicSize;
             SetLimits(desiredSize);
-            //CenterCamera();
         }
     }
 	
@@ -89,9 +88,10 @@ public class CameraController : MonoBehaviour
         SetLimits(desiredSize);
     }
 
-    public void CenterCamera() 
+    public void CenterCamera(Vector2 offset) 
     {
-        mainCamera.transform.position = new Vector3(mapSize.x / 2f, mapSize.y / 2f, mainCamera.transform.position.z);
+        Vector3 position =  new Vector3((mapSize.x + offset.x) / 2f, mapSize.y / 2f, mainCamera.transform.position.z);
+        mainCamera.transform.position = position;
     }
 
     public void ScrollToOrthographicSize (float targetSize)
