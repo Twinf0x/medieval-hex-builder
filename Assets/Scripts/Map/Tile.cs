@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType {Ocean, Grassland, Forest, Mountain}
+public enum TileType {Ocean, Grassland, Forest, Mountain, Hand}
 
 public class Tile : MonoBehaviour
 {
     [Header("Set in Editor")]
     public TileType type;
     public GameObject hoverMarker = null;
+    public bool RepresentsHand { get { return type == TileType.Hand; } }
 
     [Header("Set during play")]
     public Vector2 coordinates;
