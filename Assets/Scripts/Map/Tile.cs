@@ -39,6 +39,7 @@ public class Tile : MonoBehaviour
     {
         this.placedBuilding = building;
         building.transform.position = transform.position;
+        building.transform.SetParent(transform);
     }
 
     public void Free()
