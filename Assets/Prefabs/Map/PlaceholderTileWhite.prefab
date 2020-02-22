@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2995111527360239363}
   - component: {fileID: 677465955550327220}
   m_Layer: 0
-  m_Name: PlaceholderTileBlue
+  m_Name: PlaceholderTileWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -507916351
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4deeed3e0c7f23b4cbe284dcdcbda656, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3f26fb63254e5004d967d74d98421675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

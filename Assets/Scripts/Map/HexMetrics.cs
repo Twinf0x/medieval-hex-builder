@@ -5,7 +5,7 @@ using UnityEngine;
 public static class HexMetrics
 {
     public static int totalWidth = 350;
-    public static int surfaceHeight = 125;
+    public static int surfaceHeight = 124;
     public static int horizontalBorderLength = 140;
     public static int thickness = 40;
     public static float pixelsToUnitsFactor = 1f/350f;
