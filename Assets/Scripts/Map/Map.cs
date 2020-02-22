@@ -62,6 +62,7 @@ public class Map : MonoBehaviour
         }
         tiles.Add(coordinates, tile);
         tile.coordinates = coordinates;
+        tile.transform.SetParent(this.transform); 
     }
 
     public void PlaceTileGroup(int minTileAmount, int maxTileAmount, GameObject tilePrefab)

@@ -43,15 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435263aacfbe024dac1e98b0e53bca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 5
-  ySize: 5
-  zSize: 5
+  xSize: 8
+  ySize: 8
+  zSize: 8
+  oceanOffset: 8
   numberOfForests: 3
-  maxForestSize: 8
-  minForestSize: 4
+  maxForestSize: 12
+  minForestSize: 7
   numberOfMountainranges: 3
-  maxMountainrangeSize: 8
-  minMountainrangeSize: 4
+  maxMountainrangeSize: 9
+  minMountainrangeSize: 6
+  paddingAroundIsland: 1
   grasslandPrefab: {fileID: 7177012790920355997, guid: a8d9eab4940e11c40940cce9a47cc987,
     type: 3}
   forestPrefab: {fileID: 7177012790920355997, guid: a4902f685152d134a98c9b01f1ffda05,

@@ -23,6 +23,9 @@ public class MapGenerator : MonoBehaviour
     public int maxMountainrangeSize = 8;
     public int minMountainrangeSize = 4;
 
+    [Header("Camera Restrictions")]
+    public float paddingAroundIsland = 2f;
+
     [Header("Tile Prefabs")]
     public GameObject grasslandPrefab;
     public GameObject forestPrefab;
@@ -32,11 +35,22 @@ public class MapGenerator : MonoBehaviour
     [Header("Map Prefab")]
     public GameObject mapPrefab;
 
+    [HideInInspector]
+    public Vector2 viewPortOffset;
+
     private void Start() 
     {
-        CreateOcean();
+        viewPortOffset = CalculateViewportOffset(ySize, paddingAroundIsland);
+        Vector2 mapSize = CalculateMapSizeForCamera(xSize, ySize, zSize, paddingAroundIsland);
+        CameraController.instance.SetMapSize(mapSize);
+        CameraController.instance.CenterCamera(viewPortOffset);
+
+        Map oceanMap = CreateOcean();
+        oceanMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
+
         Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
         AddMapFeatures(islandMap);
+        islandMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
     }
 
     public Map CreateMap(int xSize, int ySize, int zSize, GameObject basePrefab)
@@ -88,14 +102,14 @@ public class MapGenerator : MonoBehaviour
 
     public void AddMapFeatures(Map map)
     {
-        for(int i = 0; i < numberOfForests; i++)
-        {
-            map.PlaceTileGroup(minForestSize, maxForestSize, forestPrefab);
-        }
-
         for(int i = 0; i < numberOfMountainranges; i++)
         {
             map.PlaceTileGroup(minMountainrangeSize, maxMountainrangeSize, mountainPrefab);
+        }
+
+        for(int i = 0; i < numberOfForests; i++)
+        {
+            map.PlaceTileGroup(minForestSize, maxForestSize, forestPrefab);
         }
     }
 
@@ -105,5 +119,25 @@ public class MapGenerator : MonoBehaviour
         oceanMap.transform.Translate(-1 * HexMetrics.xOffset * oceanOffset, -1 * HexMetrics.yOffset * oceanOffset, 0);
 
         return oceanMap;
+    }
+
+    private Vector2 CalculateMapSizeForCamera(int x, int y, int z, float padding)
+    {
+        float width = (x + y) * HexMetrics.xOffset;
+        width += HexMetrics.totalWidthInUnits;
+        width+= padding;
+        float height = (2 * z) * HexMetrics.yOffset * 2f;
+        height += HexMetrics.surfaceHeightInUnits;
+        height += padding;
+        
+        return new Vector2(width, height);
+    }
+
+    private Vector2 CalculateViewportOffset(int y, float padding)
+    {
+        float xOffset = HexMetrics.xOffset + padding;
+        float yOffset = (y * HexMetrics.yOffset) + padding;
+
+        return new Vector2(xOffset, yOffset);
     }
 }
