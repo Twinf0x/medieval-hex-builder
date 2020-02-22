@@ -5,13 +5,20 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     [Header("Map Settings")]
+    [Header("Map Size")]
     public int xSize = 0;
     public int ySize = 0;
     public int zSize = 0;
+
+    [Header("Ocean")]
     public int oceanOffset = 3;
+
+    [Header("Forests")]
     public int numberOfForests = 3;
     public int maxForestSize = 8;
     public int minForestSize = 4;
+
+    [Header("Mountains")]
     public int numberOfMountainranges = 3;
     public int maxMountainrangeSize = 8;
     public int minMountainrangeSize = 4;
@@ -28,7 +35,8 @@ public class MapGenerator : MonoBehaviour
     private void Start() 
     {
         CreateOcean();
-        CreateMap(xSize, ySize, zSize, grasslandPrefab);
+        Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
+        AddMapFeatures(islandMap);
     }
 
     public Map CreateMap(int xSize, int ySize, int zSize, GameObject basePrefab)
@@ -75,6 +83,11 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        return map;
+    }
+
+    public void AddMapFeatures(Map map)
+    {
         for(int i = 0; i < numberOfForests; i++)
         {
             map.PlaceTileGroup(minForestSize, maxForestSize, forestPrefab);
@@ -84,8 +97,6 @@ public class MapGenerator : MonoBehaviour
         {
             map.PlaceTileGroup(minMountainrangeSize, maxMountainrangeSize, mountainPrefab);
         }
-
-        return map;
     }
 
     public Map CreateOcean()

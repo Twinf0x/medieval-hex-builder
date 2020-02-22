@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    Dictionary<Vector2, Tile> tiles;
+    private Dictionary<Vector2, Tile> tiles;
+    private Vector2 invalidPosition = new Vector2(-100, -100);
 
     public void Initialize()
     {
@@ -76,11 +77,63 @@ public class Map : MonoBehaviour
         }
     }
 
-    private List<Vector2> GetGroupPositions(int groupSize)
+    private List<Vector2> GetGroupPositions(int groupSize, int maxFailures = 5)
     {
         List<Vector2> result = new List<Vector2>();
-        Vector2 startPosition = Helpers.RandomKeys(tiles).FirstOrDefault();
+        System.Random random = new System.Random();
+        int failures = 0;
+
+        Vector2 startPosition = Helpers.RandomKeys(tiles).Take(1).FirstOrDefault();
+        result.Add(startPosition);
+        
+        while(result.Count < groupSize)
+        {
+            Vector2 groupPosition = result[random.Next(result.Count)];
+            Vector2 newPosition = GetValidNeighbour(groupPosition);
+            if(newPosition != invalidPosition)
+            {
+                result.Add(newPosition);
+            }
+            else
+            {
+                if(++failures > maxFailures)
+                {
+                    Debug.Log("Couldn't find enough group Positions");
+                    break;
+                }
+            }
+        }
 
         return result;
+    }
+
+    private Vector2 GetValidNeighbour(Vector2 position, int maxTries = 5)
+    {
+        int failedTries = 0;
+        while(failedTries < maxTries)
+        {
+            int xOffset = Random.Range(-1, 2);
+            int yOffset = Random.Range(-1, 2);
+
+            Vector2 neighbour = new Vector2(position.x + xOffset, position.y + yOffset);
+            if(IsValidPosition(neighbour))
+            {
+                return neighbour;
+            }
+
+            failedTries++;
+        }
+
+        return invalidPosition;
+    }
+
+    private bool IsValidPosition(Vector2 position)
+    {
+        if(!coordinatesAreValid(position))
+        {
+            return false;
+        }
+
+        return tiles[position].type != TileType.Ocean;
     }
 }
