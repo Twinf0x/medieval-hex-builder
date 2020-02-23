@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2733417254740552298}
   - component: {fileID: 2995111527360239363}
   - component: {fileID: 677465955550327220}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TileForest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,6 +166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7386223112476277503, guid: f1c6eff144041a04d87347e974db320a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8362554764519853654, guid: f1c6eff144041a04d87347e974db320a,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8047518542304477252}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hovermarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 3885186394865494938}
   - component: {fileID: 2733417254740552298}
   - component: {fileID: 2995111527360239363}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TileOcean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
