@@ -6,7 +6,7 @@ public class Placeable : MonoBehaviour
 {
     public GameObject buildingPrefab;
     public GameObject hoverMarker;
-    public Vector3 mouseOffset = new Vector3(0.2f, 0.2f, 0);
+    public Vector3 mouseOffset = new Vector3(0.3f, 0.3f, 0);
     private bool isPickedUp = false;
     private Vector3 initialPosition = Vector3.zero;
     private Vector3 initialScale;

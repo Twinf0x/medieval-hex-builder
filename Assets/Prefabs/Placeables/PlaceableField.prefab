@@ -99,7 +99,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 3735942362620502432, guid: 1354255c378dd0242bf586d4ed571cff,
     type: 3}
   hoverMarker: {fileID: 7905867892310866365}
-  mouseOffset: {x: 0.2, y: 0.2, z: 0}
+  mouseOffset: {x: 0.3, y: 0.3, z: 0}
   isInHand: 1
 --- !u!60 &5141219921106241214
 PolygonCollider2D:
