@@ -13,6 +13,8 @@ public class Placeable : MonoBehaviour
     [HideInInspector]
     public bool isInHand = true;
 
+    private Tile locationTile;
+
     private void Awake()
     {
         initialScale = transform.localScale;
@@ -72,12 +74,16 @@ public class Placeable : MonoBehaviour
 
     public void ReplaceWithBuilding()
     {
-        if(!isInHand)
-        {
-            var buildingObj = Instantiate(buildingPrefab, transform.position, Quaternion.identity, transform.parent);
-            var building = buildingObj.GetComponent<Building>();
-        }
-        Debug.Log($"Destroying {this.gameObject.name}");
+        var buildingObj = Instantiate(buildingPrefab, transform.position, Quaternion.identity, transform.parent);
+        var building = buildingObj.GetComponent<Building>();
+
+        locationTile?.PlaceBuilding(building);
+
         Destroy(this.gameObject);
+    }
+
+    public void SetLocation(Tile tile)
+    {
+        locationTile = tile;
     }
 }

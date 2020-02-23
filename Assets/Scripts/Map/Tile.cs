@@ -15,7 +15,9 @@ public class Tile : MonoBehaviour
     public Vector2 coordinates;
 
     [HideInInspector]
-    public Placeable placedBuilding = null;
+    public Placeable localPlaceable = null;
+    [HideInInspector]
+    public Building placedBuilding = null;
 
     public bool IsOccupied
     {
@@ -35,11 +37,27 @@ public class Tile : MonoBehaviour
         hoverMarker.SetActive(false);
     }
 
-    public void PlaceBuilding(Placeable building)
+    public void PlacePlaceable(Placeable placeable)
     {
-        this.placedBuilding = building;
+        placeable.transform.position = transform.position;
+        placeable.transform.SetParent(transform);
+
+        this.localPlaceable = placeable;
+        placeable.SetLocation(this);
+
+        if(!RepresentsHand)
+        {
+            placeable.ReplaceWithBuilding();
+        }
+    }
+
+    public void PlaceBuilding(Building building)
+    {
         building.transform.position = transform.position;
         building.transform.SetParent(transform);
+
+        this.placedBuilding = building;
+        building.PlaceOn(this);
     }
 
     public void Free()
