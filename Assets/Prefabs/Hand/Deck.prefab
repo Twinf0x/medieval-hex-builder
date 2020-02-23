@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e58f0f11b8b4d44802d76e40279176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldPrefab: {fileID: 2505863349357598904, guid: 488e82546bc22634e8133c03658e0e76,
-    type: 3}
   initialDrawAmount: 5
+  levelPools:
+  - {fileID: 11400000, guid: 12761777a6f08624096709afecb43122, type: 2}

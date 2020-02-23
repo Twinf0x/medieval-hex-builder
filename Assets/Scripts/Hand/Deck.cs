@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Deck : MonoBehaviour
 {
     public static Deck instance;
 
+    [ContextMenuItem("Draw", "DrawToHand")]
     public int initialDrawAmount = 5;
 
     public List<Pool> levelPools = new List<Pool>();
@@ -27,6 +29,11 @@ public class Deck : MonoBehaviour
     private void Start()
     {
         instance.DrawToHand(initialDrawAmount);
+    }
+
+    public void DrawToHand()
+    {
+        DrawToHand(initialDrawAmount);
     }
 
     public void DrawToHand(int amount)

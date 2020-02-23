@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: Level1_Pool
   m_EditorClassIdentifier: 
   items:
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - prefab: {fileID: 0}
-    amount: {x: 0, y: 0}
+  - prefab: {fileID: 2505863349357598904, guid: 488e82546bc22634e8133c03658e0e76,
+      type: 3}
+    amount: {x: 3, y: 4}
+  - prefab: {fileID: 2505863349357598904, guid: a44eb5ecf44836f46b42e921c98ae320,
+      type: 3}
+    amount: {x: 1, y: 1}
+  - prefab: {fileID: 2505863349357598904, guid: 0371012b07a5ce14cadc6f306e371806,
+      type: 3}
+    amount: {x: 1, y: 2}
+  - prefab: {fileID: 2505863349357598904, guid: 1864416718602ba4b9c968bf54ff2bd7,
+      type: 3}
+    amount: {x: 1, y: 1}
+  - prefab: {fileID: 2505863349357598904, guid: 32ec9b063b6e5214bbb499b587285858,
+      type: 3}
+    amount: {x: 2, y: 3}
+  - prefab: {fileID: 2505863349357598904, guid: 0f2f01c06a2af9f46bdbad220b8006b4,
+      type: 3}
+    amount: {x: 1, y: 1}
