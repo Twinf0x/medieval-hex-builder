@@ -1141,7 +1141,7 @@ PrefabInstance:
     - target: {fileID: 7898523709138791431, guid: 3e5de3327a10b414b87bb4a0a277814c,
         type: 3}
       propertyPath: growthFactor
-      value: 1.33
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 8704311190610526921, guid: 3e5de3327a10b414b87bb4a0a277814c,
         type: 3}

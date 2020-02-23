@@ -102,7 +102,10 @@ public class PlacementController : MonoBehaviour
             return;
         }
 
-        PlaceBuildingOnTile(selectedPlaceable, hoverTile);
+        if(selectedPlaceable.MeetsPlacementRestrictions(hoverTile))
+        {
+            PlaceBuildingOnTile(selectedPlaceable, hoverTile);
+        }
     }
 
     public bool PlaceBuildingOnTile(Placeable building, Tile tile)
@@ -115,6 +118,14 @@ public class PlacementController : MonoBehaviour
         {
             selectedPlaceable.PickUp();
             selectedPlaceable.isInHand = true;
+        }
+
+        Building buildingOnTile = tile.placedBuilding;
+        if(buildingOnTile != null)
+        {
+            Treasury.instance.allPlacedBuildings.Remove(buildingOnTile);
+            tile.placedBuilding = null;
+            Destroy(buildingOnTile.gameObject);
         }
         
         building.Place();

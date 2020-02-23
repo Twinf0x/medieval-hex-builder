@@ -100,6 +100,8 @@ MonoBehaviour:
     type: 3}
   hoverMarker: {fileID: 7905867892310866365}
   mouseOffset: {x: 0.3, y: 0.3, z: 0}
+  tileRestriction: 3
+  buildingRestriction: 
   isInHand: 1
 --- !u!60 &5141219921106241214
 PolygonCollider2D:

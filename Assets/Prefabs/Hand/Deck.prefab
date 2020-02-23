@@ -46,3 +46,7 @@ MonoBehaviour:
   initialDrawAmount: 5
   levelPools:
   - {fileID: 11400000, guid: 12761777a6f08624096709afecb43122, type: 2}
+  - {fileID: 11400000, guid: 9428da742ae62c44982858a628977121, type: 2}
+  - {fileID: 11400000, guid: 196c8bc56e789ce40b6c92ffb82ffba1, type: 2}
+  - {fileID: 11400000, guid: e9651c07608cdb04a8e4ee55b4942e66, type: 2}
+  - {fileID: 11400000, guid: 2c30f34dfe08eb4439ff8c2d9f90d68a, type: 2}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3079697174301909478}
   - component: {fileID: 5141219921106241214}
   m_Layer: 14
-  m_Name: PlaceableWoodcutter
+  m_Name: PlaceableFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -1669136461
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ffd6b14881642a459c985d0e8f82a99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4382a7d7b07f1a54eb3582055b6c7dc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,12 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3d509f058da441842d3f17dab2b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 3735942362620502432, guid: 5adcce76f3b063a4f97e711c5e331201,
+  buildingPrefab: {fileID: 3735942362620502432, guid: 34a024fd09a0614478865e23ab7c92bd,
     type: 3}
   hoverMarker: {fileID: 7905867892310866365}
   mouseOffset: {x: 0.3, y: 0.3, z: 0}
-  tileRestriction: 2
-  buildingRestriction: 
+  tileRestriction: 1
+  buildingRestriction: Field
   isInHand: 1
 --- !u!60 &5141219921106241214
 PolygonCollider2D:

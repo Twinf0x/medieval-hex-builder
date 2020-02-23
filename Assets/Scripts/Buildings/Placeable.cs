@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class Placeable : MonoBehaviour
     public GameObject buildingPrefab;
     public GameObject hoverMarker;
     public Vector3 mouseOffset = new Vector3(0.3f, 0.3f, 0);
+    public TileType tileRestriction = TileType.None;
+    public string buildingRestriction = "";
     private bool isPickedUp = false;
     private Vector3 initialPosition = Vector3.zero;
     private Vector3 initialScale;
@@ -85,5 +88,30 @@ public class Placeable : MonoBehaviour
     public void SetLocation(Tile tile)
     {
         locationTile = tile;
+    }
+
+    public bool MeetsPlacementRestrictions(Tile tile)
+    {
+        if(tileRestriction != TileType.None && tile.type != tileRestriction)
+        {
+            return false;
+        }
+
+        if(buildingRestriction == "" && tile.placedBuilding != null)
+        {
+            return false;
+        }
+
+        if(buildingRestriction != "" && tile.placedBuilding == null)
+        {
+            return false;
+        }
+
+        if(buildingRestriction != "" && tile.placedBuilding != null && !(tile.placedBuilding.GetType().Name == buildingRestriction))
+        {
+            return false;
+        }
+
+        return true;
     }
 }
