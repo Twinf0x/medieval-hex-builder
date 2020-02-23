@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Building : MonoBehaviour
 {
     public int baseProduction;
+    public GameObject popUpPrefab;
     internal Tile locationTile;
 
     public void PlaceOn(Tile tile)
@@ -18,6 +19,10 @@ public class Building : MonoBehaviour
 
     public virtual void Produce()
     {
+        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
+        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
+        popUp.text.text = baseProduction.ToString();
+
         Treasury.instance.AddMoney(baseProduction);
     }
 }
