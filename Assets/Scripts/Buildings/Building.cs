@@ -1,18 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Building : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int baseProduction;
+    internal Tile locationTile;
+
+    public void PlaceOn(Tile tile)
     {
-        
+        this.locationTile = tile;
+        Treasury.instance.allPlacedBuildings.Add(this);
+        Treasury.instance.CollectMoney();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Produce()
     {
-        
+        Treasury.instance.AddMoney(baseProduction);
     }
 }

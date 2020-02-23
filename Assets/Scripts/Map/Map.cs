@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    private Dictionary<Vector2, Tile> tiles;
+    public Dictionary<Vector2, Tile> tiles;
     private Vector2 invalidPosition = new Vector2(-100, -100);
 
     public void Initialize()
@@ -62,7 +62,8 @@ public class Map : MonoBehaviour
         }
         tiles.Add(coordinates, tile);
         tile.coordinates = coordinates;
-        tile.transform.SetParent(this.transform); 
+        tile.transform.SetParent(this.transform);
+        tile.map = this;
     }
 
     public void PlaceTileGroup(int minTileAmount, int maxTileAmount, GameObject tilePrefab)
@@ -135,5 +136,31 @@ public class Map : MonoBehaviour
         }
 
         return tiles[position].type != TileType.Ocean;
+    }
+
+    public List<Tile> GetAllTilesAround(Tile tile, int maxDistance)
+    {
+        List<Tile> result = new List<Tile>();
+        for(int x = -maxDistance; x <= maxDistance; x++)
+        {
+            for(int y = -maxDistance; y <= maxDistance; y++)
+            {
+                if(Mathf.Abs(x + y) > maxDistance)
+                {
+                    continue;
+                }
+
+                Vector2 coordinates = new Vector2(x+ tile.coordinates.x, y + tile.coordinates.y);
+
+                if(!coordinatesAreValid(coordinates))
+                {
+                    continue;
+                }
+                
+                result.Add(tiles[coordinates]);
+            }
+        }
+
+        return result;
     }
 }

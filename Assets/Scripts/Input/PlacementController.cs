@@ -110,7 +110,7 @@ public class PlacementController : MonoBehaviour
         pickedUpFromTile?.Free();
         pickedUpFromTile = null;
         
-        selectedPlaceable = tile.placedBuilding;
+        selectedPlaceable = tile.localPlaceable;
         if(selectedPlaceable != null)
         {
             selectedPlaceable.PickUp();
@@ -118,7 +118,7 @@ public class PlacementController : MonoBehaviour
         }
         
         building.Place();
-        tile.PlaceBuilding(building);
+        tile.PlacePlaceable(building);
         Hand.instance.RemovePlaceable(building);
         building.isInHand = tile.RepresentsHand;
         return true;
