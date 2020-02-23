@@ -121,6 +121,10 @@ public class PlacementController : MonoBehaviour
         tile.PlaceBuilding(building);
         Hand.instance.RemovePlaceable(building);
         building.isInHand = tile.RepresentsHand;
+        if(!building.isInHand)
+        {
+            building.ReplaceWithBuilding();
+        }
         return true;
     }
 

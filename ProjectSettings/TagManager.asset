@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Floor
+  - 
+  - 
+  - Building
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ocean
+    uniqueID: 355696207
+    locked: 0
+  - name: Floor
+    uniqueID: 3787050945
+    locked: 0
+  - name: HoverMarker
+    uniqueID: 1386493727
+    locked: 0
+  - name: Building
+    uniqueID: 1615527345
+    locked: 0
+  - name: Hand
+    uniqueID: 2625830835
+    locked: 0
+  - name: HandHoverMarker
+    uniqueID: 1757958249
+    locked: 0
