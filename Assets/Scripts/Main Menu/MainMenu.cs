@@ -8,6 +8,6 @@ public class MainMenu : MonoBehaviour
     public string gameSceneName;
 
     public void OpenGameScene() {
-        SceneManager.LoadScene(gameSceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
     }
 }
