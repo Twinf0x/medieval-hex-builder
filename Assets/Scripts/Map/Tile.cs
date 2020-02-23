@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType {Ocean, Grassland, Forest, Mountain, Hand}
+public enum TileType {Ocean, Grassland, Forest, Mountain, Hand, None}
 
 public class Tile : MonoBehaviour
 {

@@ -102,7 +102,10 @@ public class PlacementController : MonoBehaviour
             return;
         }
 
-        PlaceBuildingOnTile(selectedPlaceable, hoverTile);
+        if(selectedPlaceable.MeetsPlacementRestrictions(hoverTile))
+        {
+            PlaceBuildingOnTile(selectedPlaceable, hoverTile);
+        }
     }
 
     public bool PlaceBuildingOnTile(Placeable building, Tile tile)
