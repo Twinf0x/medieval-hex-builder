@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mill : Building
+public class Brewery : Building
 {
     public int collectionRange = 2;
-    public int bonusForBakery = 10;
-    public int bonusForBrewery = -10;
-
+    public int bonusForMill = -6;
+    
     public override void Produce()
     {
         List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
@@ -20,10 +19,10 @@ public class Mill : Building
                 continue;
             }
 
-            if(tile.placedBuilding is Brewery)
+            if(tile.placedBuilding is Mill)
             {
-                Brewery brewery = tile.placedBuilding as Brewery;
-                collectedFunds += brewery.bonusForMill;
+                Mill mill = tile.placedBuilding as Mill;
+                collectedFunds += mill.bonusForBrewery;
             }
 
             if(tile.placedBuilding is Field)

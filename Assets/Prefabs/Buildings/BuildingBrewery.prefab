@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718513519412349396}
   - component: {fileID: 2775183744385553080}
+  - component: {fileID: -4943239800349710618}
   m_Layer: 0
   m_Name: BuildingBrewery
   m_TagString: Untagged
@@ -81,3 +82,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4943239800349710618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735942362620502432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0c45373b292d049a22d04e075cfbeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseProduction: 0
+  collectionRange: 2
+  bonusForMill: -6

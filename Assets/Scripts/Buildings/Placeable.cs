@@ -102,6 +102,11 @@ public class Placeable : MonoBehaviour
             return false;
         }
 
+        if(buildingRestriction != "" && tile.placedBuilding == null)
+        {
+            return false;
+        }
+
         if(buildingRestriction != "" && tile.placedBuilding != null && !(tile.placedBuilding.GetType().Name == buildingRestriction))
         {
             return false;

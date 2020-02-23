@@ -1212,6 +1212,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6756790091394259634, guid: 4fe264afff91afc4c8720f9e3a23100e,
+        type: 3}
+      propertyPath: levelPools.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 670bb6292616d1542b60fe2723cba14f,
+        type: 2}
     - target: {fileID: 7990398180377732164, guid: 4fe264afff91afc4c8720f9e3a23100e,
         type: 3}
       propertyPath: m_Name

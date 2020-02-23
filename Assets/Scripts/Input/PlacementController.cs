@@ -119,6 +119,14 @@ public class PlacementController : MonoBehaviour
             selectedPlaceable.PickUp();
             selectedPlaceable.isInHand = true;
         }
+
+        Building buildingOnTile = tile.placedBuilding;
+        if(buildingOnTile != null)
+        {
+            Treasury.instance.allPlacedBuildings.Remove(buildingOnTile);
+            tile.placedBuilding = null;
+            Destroy(buildingOnTile.gameObject);
+        }
         
         building.Place();
         tile.PlacePlaceable(building);
