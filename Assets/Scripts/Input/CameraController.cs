@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     public Vector2 sizeRestrictions;
     private Vector2 mapSize;
 
-    private bool canMoveCamera = true;
+    [SerializeField] private bool canMoveCamera = true;
     private Coroutine scrollCoroutine = null;
     private float desiredSize;
 
