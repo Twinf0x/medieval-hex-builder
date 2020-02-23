@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class Building : MonoBehaviour
 {
     public int baseProduction;
-    public List<UnityEvent> productionModificators = new List<UnityEvent>();
-    private Tile locationTile;
+    internal Tile locationTile;
 
     public void PlaceOn(Tile tile)
     {
@@ -17,7 +16,7 @@ public class Building : MonoBehaviour
         Treasury.instance.CollectMoney();
     }
 
-    public void Produce()
+    public virtual void Produce()
     {
         Treasury.instance.AddMoney(baseProduction);
     }

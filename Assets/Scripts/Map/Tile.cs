@@ -11,8 +11,9 @@ public class Tile : MonoBehaviour
     public GameObject hoverMarker = null;
     public bool RepresentsHand { get { return type == TileType.Hand; } }
 
-    [Header("Set during play")]
+    [Header("Set during play, but visible for Debugging")]
     public Vector2 coordinates;
+    public Map map;
 
     [HideInInspector]
     public Placeable localPlaceable = null;
@@ -63,5 +64,10 @@ public class Tile : MonoBehaviour
     public void Free()
     {
         this.placedBuilding = null;
+    }
+
+    public List<Tile> GetAllTilesAround(int maxDistance)
+    {
+        return map.GetAllTilesAround(this, maxDistance);
     }
 }

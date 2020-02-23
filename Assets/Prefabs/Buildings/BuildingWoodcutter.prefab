@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718513519412349396}
   - component: {fileID: 2775183744385553080}
-  - component: {fileID: 7769976807023286586}
+  - component: {fileID: 5092875450771932379}
   m_Layer: 0
   m_Name: BuildingWoodcutter
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7769976807023286586
+--- !u!114 &5092875450771932379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3735942362620502432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650aefde1f0827e43bd036e34e5dba69, type: 3}
+  m_Script: {fileID: 11500000, guid: b763dfb09de96b84fb2655e73e4b0166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseProduction: 1
-  productionModificators: []
+  bonusPerForest: 1
