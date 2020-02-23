@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2733417254740552298}
   - component: {fileID: 2995111527360239363}
   - component: {fileID: 677465955550327220}
+  - component: {fileID: 2998149478559491089}
   m_Layer: 11
   m_Name: TileGrassland
   m_TagString: Untagged
@@ -99,6 +100,8 @@ MonoBehaviour:
   type: 1
   hoverMarker: {fileID: 2923478607794111558}
   coordinates: {x: 0, y: 0}
+  map: {fileID: 0}
+  localPlaceable: {fileID: 0}
   placedBuilding: {fileID: 0}
 --- !u!60 &677465955550327220
 PolygonCollider2D:
@@ -150,6 +153,22 @@ PolygonCollider2D:
       - {x: 0.22571428, y: -0.17142858}
       - {x: 0.26, y: -0.15142857}
       - {x: 0.31428573, y: -0.12}
+--- !u!114 &2998149478559491089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7177012790920355997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abf06265362e5b45835a10012d0b37e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - {fileID: 21300000, guid: 08439e25a74eae24a96b6f19816357b3, type: 3}
+  - {fileID: 21300000, guid: 3734cbe9ddfac7440b6805df0bfcb168, type: 3}
+  - {fileID: 21300000, guid: c8254af95e25a744ab232e417155cf31, type: 3}
 --- !u!1001 &5625957476913921721
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class Hand : MonoBehaviour
     private float distanceBetweenHandTiles = 0.5f;
     private float currentHandScale = 1f;
 
+    public bool IsEmptyAfterPlacement { get{ return placeablesInHand.Count <= 1; } }
+
     private void Awake()
     {
         if(instance != null && instance != this)
