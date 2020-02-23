@@ -25,6 +25,10 @@ public class Bakery : Building
             }
         }
 
+        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
+        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
+        popUp.text.text = (collectedFunds + baseProduction).ToString();
+
         Treasury.instance.AddMoney(collectedFunds + baseProduction);
     }
 }

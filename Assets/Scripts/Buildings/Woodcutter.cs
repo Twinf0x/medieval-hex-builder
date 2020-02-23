@@ -23,6 +23,12 @@ public class Woodcutter : Building
 
     public override void Produce()
     {
-        Treasury.instance.AddMoney(TotalProduction);
+        int temp = TotalProduction;
+        
+        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
+        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
+        popUp.text.text = temp.ToString();
+
+        Treasury.instance.AddMoney(temp);
     }
 }
