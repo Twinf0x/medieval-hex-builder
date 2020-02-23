@@ -39,7 +39,6 @@ public class Hand : MonoBehaviour
         ArrangeHand();
 
         PlacementController.instance.PlaceBuildingOnTile(placeable, tile);
-        //placeable.transform.SetParent(tile.transform);
         placeablesInHand.Add(placeable);
     }
 

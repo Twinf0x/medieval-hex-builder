@@ -46,5 +46,5 @@ MonoBehaviour:
   handTilePrefab: {fileID: 5959729843891577882, guid: e3b9ab6258a478f43a4d12ca7bb23bd7,
     type: 3}
   handScales: {x: 0.6, y: 1.4}
-  handTileDistances: {x: 2, y: 0.3}
-  handTilesForDistances: {x: 2, y: 8}
+  handTileDistances: {x: 1.5, y: 0.5}
+  handTilesForDistances: {x: 2, y: 10}
