@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,12 @@ public class Treasury : MonoBehaviour
     public int baseThreshold = 10;
     public float growthFactor = 0.33f;
     public Slider levelProgressBar;
+    public Transform moneyIndicator;
+    public TextMeshProUGUI moneyText;
+
+    public GameObject gameOverScreen;
+    public TextMeshProUGUI gameOverMoneyText;
+
 
     [Header("Set during play, Visible for Debug")]
     public int nextThreshold = 0;
@@ -18,6 +25,8 @@ public class Treasury : MonoBehaviour
     public int currentMoney = 0;
     public int currentLevel = 0;
     public List<Building> allPlacedBuildings = new List<Building>();
+
+    private Vector3 indicatorScale;
 
     private void Awake()
     {
@@ -29,6 +38,7 @@ public class Treasury : MonoBehaviour
         {
             instance = this;
             levelProgressBar.value = currentMoney;
+            indicatorScale = moneyIndicator.localScale;
             NextLevel();
         }
     }
@@ -39,6 +49,14 @@ public class Treasury : MonoBehaviour
         {
             building.Produce();
             AudioManager.instance.Play("Coins");
+        }
+
+        moneyText.text = currentMoney.ToString();
+        StartCoroutine(SimpleAnimations.instance.Wobble(moneyIndicator, 0.25f, 1, () => moneyIndicator.localScale = indicatorScale));
+
+        if(Hand.instance.IsEmptyAfterPlacement)
+        {
+            Lose();
         }
     }
 
@@ -68,5 +86,11 @@ public class Treasury : MonoBehaviour
     {
         float power = 1 + ((level - 1) * growthFactor);
         return (int) Mathf.Pow(baseThreshold, power);
+    }
+
+    private void Lose()
+    {
+        gameOverMoneyText.text = $"You earned {currentMoney.ToString()} Gold!";
+        gameOverScreen.SetActive(true);
     }
 }
