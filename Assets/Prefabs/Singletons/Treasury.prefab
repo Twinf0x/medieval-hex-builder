@@ -44,8 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseThreshold: 10
-  growthFactor: 0.33
+  growthFactorOne: 0.66
+  growthFactorTwo: 0.33
+  levelProgressBar: {fileID: 0}
+  moneyIndicator: {fileID: 0}
+  moneyText: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  gameOverMoneyText: {fileID: 0}
   nextThreshold: 0
   previousThreshold: 0
   currentMoney: 0
   currentLevel: 0
+  allPlacedBuildings: []

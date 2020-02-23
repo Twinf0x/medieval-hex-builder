@@ -10,7 +10,8 @@ public class Treasury : MonoBehaviour
 
     [Header("Set in Editor")]
     public int baseThreshold = 10;
-    public float growthFactor = 0.33f;
+    public float growthFactorOne = 1f;
+    public float growthFactorTwo = 0.33f;
     public Slider levelProgressBar;
     public Transform moneyIndicator;
     public TextMeshProUGUI moneyText;
@@ -84,7 +85,7 @@ public class Treasury : MonoBehaviour
 
     public int GetThresholdForLevel(int level)
     {
-        float power = 1 + ((level - 1) * growthFactor);
+        float power = 1 + (Mathf.Min((level - 1), 3) * growthFactorOne) + (Mathf.Max((level - 4), 0) * growthFactorTwo);
         return (int) Mathf.Pow(baseThreshold, power);
     }
 

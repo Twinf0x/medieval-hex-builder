@@ -29,7 +29,7 @@ public class Mill : Building
             if(tile.placedBuilding is Field)
             {
                 Field field = tile.placedBuilding as Field;
-                collectedFunds += field.bonusForBrewery;
+                collectedFunds += field.bonusForMill;
             }
         }
 

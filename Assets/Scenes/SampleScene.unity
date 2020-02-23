@@ -2976,11 +2976,6 @@ PrefabInstance:
       objectReference: {fileID: 77062177}
     - target: {fileID: 7898523709138791431, guid: 3e5de3327a10b414b87bb4a0a277814c,
         type: 3}
-      propertyPath: growthFactor
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 7898523709138791431, guid: 3e5de3327a10b414b87bb4a0a277814c,
-        type: 3}
       propertyPath: moneyText
       value: 
       objectReference: {fileID: 28194573}
