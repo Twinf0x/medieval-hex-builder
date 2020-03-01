@@ -10,6 +10,7 @@ public class SimpleAnimations : MonoBehaviour
     public AnimationCurve wobbleCurve;
     public AnimationCurve stretchCurve;
     public AnimationCurve squashCurve;
+    public AnimationCurve movementCurve;
 
     private void Awake()
     {
@@ -111,6 +112,39 @@ public class SimpleAnimations : MonoBehaviour
 
         transform.localScale = new Vector3(initialX, initialY, initialZ);
 
+        callback?.Invoke();
+    }
+
+    public IEnumerator Translate(Transform transform, float duration, Vector3 translation, float factor = 1f, Action callback = null)
+    {
+        float timer = 0f;
+        float percentage = timer / duration;
+        float translationFactor = movementCurve.Evaluate(percentage) * factor;
+        Vector3 currentTranslation = translation * translationFactor;
+
+        Vector3 initialPosition = transform.localPosition;
+        float initialX = initialPosition.x;
+        float initialY = initialPosition.y;
+        float initialZ = initialPosition.z;
+        Vector3 currentPosition = new Vector3(initialX + currentTranslation.x, initialY + currentTranslation.y, initialZ + currentTranslation.z);
+        transform.localPosition = currentPosition;
+
+        yield return null;
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+            percentage = timer / duration;
+            translationFactor = movementCurve.Evaluate(percentage) * factor;
+            currentTranslation = translation * translationFactor;
+            
+            currentPosition = new Vector3(initialX + currentTranslation.x, initialY + currentTranslation.y, initialZ + currentTranslation.z);
+            transform.localPosition = currentPosition;
+
+            yield return null;
+        }
+
+        transform.localPosition = initialPosition + translation;
         callback?.Invoke();
     }
 }

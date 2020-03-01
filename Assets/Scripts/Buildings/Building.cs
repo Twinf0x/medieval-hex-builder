@@ -9,10 +9,17 @@ public class Building : MonoBehaviour
     public int baseProduction;
     public GameObject popUpPrefab;
     internal Tile locationTile;
+    internal Vector3 initialScale;
+    
+    private void Awake()
+    {
+        initialScale = transform.localScale;
+    }
 
     public void PlaceOn(Tile tile)
     {
         this.locationTile = tile;
+        StartCoroutine(SimpleAnimations.instance.Squash(transform, 0.25f, 1, () => this.transform.localScale = initialScale));
         Treasury.instance.allPlacedBuildings.Add(this);
         Treasury.instance.CollectMoney();
     }

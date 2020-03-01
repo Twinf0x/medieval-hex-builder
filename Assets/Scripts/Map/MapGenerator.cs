@@ -50,6 +50,7 @@ public class MapGenerator : MonoBehaviour
 
         Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
         AddMapFeatures(islandMap);
+        StartCoroutine(AnimateMapCreation(islandMap, 1.5f));
         islandMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
     }
 
@@ -100,7 +101,7 @@ public class MapGenerator : MonoBehaviour
         return map;
     }
 
-    public void AddMapFeatures(Map map)
+    private void AddMapFeatures(Map map)
     {
         for(int i = 0; i < numberOfMountainranges; i++)
         {
@@ -110,6 +111,24 @@ public class MapGenerator : MonoBehaviour
         for(int i = 0; i < numberOfForests; i++)
         {
             map.PlaceTileGroup(minForestSize, maxForestSize, forestPrefab);
+        }
+    }
+
+    private IEnumerator AnimateMapCreation(Map map, float duration) 
+    {
+        float yOffset = 10f;
+        float timeBetweenTiles = duration / map.tiles.Count;
+
+        foreach(var tile in map.tiles.Values)
+        {
+            Vector3 tempPos = tile.transform.localPosition;
+            tile.transform.Translate(0f, yOffset, 0f);
+        }
+
+        foreach(var tile in map.tiles.Values)
+        {
+            StartCoroutine(SimpleAnimations.instance.Translate(tile.transform, 1f, new Vector3(0f, -1 * yOffset, 0f)));
+            yield return new WaitForSeconds(timeBetweenTiles);
         }
     }
 
