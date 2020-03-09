@@ -15,6 +15,7 @@ public class Treasury : MonoBehaviour
     public Slider levelProgressBar;
     public Transform moneyIndicator;
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI levelText;
 
     public GameObject gameOverScreen;
     public TextMeshProUGUI gameOverMoneyText;
@@ -78,6 +79,8 @@ public class Treasury : MonoBehaviour
 
         levelProgressBar.minValue = previousThreshold;
         levelProgressBar.maxValue = nextThreshold;
+
+        levelText.text = currentLevel.ToString();
 
         if(currentLevel > 1)
             Deck.instance.DrawToHand();

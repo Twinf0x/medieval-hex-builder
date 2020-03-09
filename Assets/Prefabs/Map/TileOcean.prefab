@@ -127,5 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   hoverMarker: {fileID: 1990454248583023847}
+  descriptionData: {fileID: 11400000, guid: be9260e9a44480c499ad325df322a0e1, type: 2}
   coordinates: {x: 0, y: 0}
+  map: {fileID: 0}
+  localPlaceable: {fileID: 0}
   placedBuilding: {fileID: 0}

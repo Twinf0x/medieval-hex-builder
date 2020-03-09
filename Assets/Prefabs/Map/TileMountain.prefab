@@ -98,7 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   hoverMarker: {fileID: 2923478607794111558}
+  descriptionData: {fileID: 11400000, guid: 7efc9a3428f3eb1429d90dd309277aec, type: 2}
   coordinates: {x: 0, y: 0}
+  map: {fileID: 0}
+  localPlaceable: {fileID: 0}
   placedBuilding: {fileID: 0}
 --- !u!60 &677465955550327220
 PolygonCollider2D:

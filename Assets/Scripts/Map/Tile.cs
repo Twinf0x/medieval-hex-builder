@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
     [Header("Set in Editor")]
     public TileType type;
     public GameObject hoverMarker = null;
-    public bool RepresentsHand { get { return type == TileType.Hand; } }
+    public TileDescriptionData descriptionData;
 
     [Header("Set during play, but visible for Debugging")]
     public Vector2 coordinates;
@@ -19,6 +19,7 @@ public class Tile : MonoBehaviour
     public Placeable localPlaceable = null;
     [HideInInspector]
     public Building placedBuilding = null;
+    public bool RepresentsHand { get { return type == TileType.Hand; } }
 
     public bool IsOccupied
     {
@@ -31,6 +32,7 @@ public class Tile : MonoBehaviour
     private void OnMouseEnter()
     {
         hoverMarker.SetActive(true);
+        UIManager.instance.ShowTileDescription(descriptionData);
     }
 
     private void OnMouseExit()

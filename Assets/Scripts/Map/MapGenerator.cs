@@ -25,6 +25,9 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Camera Restrictions")]
     public float paddingAroundIsland = 2f;
+    [Header("Animation")]
+    public float animationDuration = 2f;
+    public float dropDuration = 1.5f;
 
     [Header("Tile Prefabs")]
     public GameObject grasslandPrefab;
@@ -50,7 +53,7 @@ public class MapGenerator : MonoBehaviour
 
         Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
         AddMapFeatures(islandMap);
-        StartCoroutine(AnimateMapCreation(islandMap, 1.5f));
+        StartCoroutine(AnimateMapCreation(islandMap, animationDuration));
         islandMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
     }
 
@@ -127,7 +130,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach(var tile in map.tiles.Values)
         {
-            StartCoroutine(SimpleAnimations.instance.Translate(tile.transform, 1f, new Vector3(0f, -1 * yOffset, 0f)));
+            StartCoroutine(SimpleAnimations.instance.Translate(tile.transform, dropDuration, new Vector3(0f, -1 * yOffset, 0f)));
             yield return new WaitForSeconds(timeBetweenTiles);
         }
     }
