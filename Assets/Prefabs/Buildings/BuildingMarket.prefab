@@ -97,5 +97,6 @@ MonoBehaviour:
   baseProduction: 0
   popUpPrefab: {fileID: 7543788039567795015, guid: d098349604c1b914b8f89b5dd6102ed6,
     type: 3}
+  descriptionData: {fileID: 11400000, guid: a227e3c6036383e498d5a2022aaa0b6f, type: 2}
   collectionRange: 2
   bonusForChurch: -15

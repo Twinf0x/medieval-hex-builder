@@ -97,4 +97,6 @@ MonoBehaviour:
   baseProduction: 12
   popUpPrefab: {fileID: 7543788039567795015, guid: d098349604c1b914b8f89b5dd6102ed6,
     type: 3}
-  malusForNonHouse: 2
+  descriptionData: {fileID: 11400000, guid: 7c5c2dd8aef2d47449ccf2d0c756bfe4, type: 2}
+  bonusPerHouse: 12
+  range: 2

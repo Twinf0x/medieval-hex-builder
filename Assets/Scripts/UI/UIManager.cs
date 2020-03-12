@@ -6,8 +6,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [SerializeField]
-    private TileDescription tileDescription;
+    [SerializeField] private TileDescription tileDescription;
+    [SerializeField] private BuildingDescription buildingDescription;
 
     private void Awake() 
     {
@@ -23,7 +23,29 @@ public class UIManager : MonoBehaviour
 
     public void ShowTileDescription(TileDescriptionData data) 
     {
+        if(data == null) 
+        {
+            tileDescription.Hide();
+            return;
+        }
         tileDescription.Show();
         tileDescription.SetData(data);
+    }
+
+    public void ShowBuildingDescription(BuildingDescriptionData data) 
+    {
+        if(data == null) 
+        {
+            buildingDescription.Hide();
+            return;
+        }
+
+        buildingDescription.Show();
+        buildingDescription.SetData(data);
+    }
+
+    public void HideBuildingDescription() 
+    {
+        buildingDescription.Hide();
     }
 }

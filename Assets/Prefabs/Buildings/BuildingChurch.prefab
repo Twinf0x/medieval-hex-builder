@@ -97,5 +97,6 @@ MonoBehaviour:
   baseProduction: 0
   popUpPrefab: {fileID: 7543788039567795015, guid: d098349604c1b914b8f89b5dd6102ed6,
     type: 3}
+  descriptionData: {fileID: 11400000, guid: 3cff368f97ff7824eb0b22716f697750, type: 2}
   collectionRange: 2
   bonusForMarket: -15

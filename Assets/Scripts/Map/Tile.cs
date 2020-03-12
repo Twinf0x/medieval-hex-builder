@@ -33,6 +33,15 @@ public class Tile : MonoBehaviour
     {
         hoverMarker.SetActive(true);
         UIManager.instance.ShowTileDescription(descriptionData);
+
+        if(placedBuilding != null) 
+        {
+            UIManager.instance.ShowBuildingDescription(placedBuilding.descriptionData);
+        }
+        else
+        {
+            UIManager.instance.HideBuildingDescription();
+        }
     }
 
     private void OnMouseExit()

@@ -97,4 +97,5 @@ MonoBehaviour:
   baseProduction: 1
   popUpPrefab: {fileID: 7543788039567795015, guid: d098349604c1b914b8f89b5dd6102ed6,
     type: 3}
+  descriptionData: {fileID: 11400000, guid: 6d1af80510acef748aee1405c841dda7, type: 2}
   bonusPerForest: 1

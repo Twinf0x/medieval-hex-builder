@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class House : Building
 {
-    public int malusForNonHouse = 1;
+    public int bonusPerHouse = 6;
+    public int range;
+
     public int TotalProduction
     {
         get
         {
             int total = baseProduction;
-            List<Tile> tilesInRange = locationTile.GetAllTilesAround(1);
+            List<Tile> tilesInRange = locationTile.GetAllTilesAround(range);
             foreach(Tile tile in tilesInRange)
             {
                 if(tile.placedBuilding == null)
@@ -20,10 +22,8 @@ public class House : Building
 
                 if(tile.placedBuilding.GetType().Name == "House")
                 {
-                    continue;
+                    total += bonusPerHouse;
                 }
-
-                total -= malusForNonHouse;
             }
 
             return total;

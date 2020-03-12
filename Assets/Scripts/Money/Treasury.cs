@@ -50,7 +50,7 @@ public class Treasury : MonoBehaviour
         foreach(Building building in allPlacedBuildings)
         {
             building.Produce();
-            AudioManager.instance.Play("Coins");
+            AudioManager.instance?.Play("Coins");
         }
 
         moneyText.text = currentMoney.ToString();

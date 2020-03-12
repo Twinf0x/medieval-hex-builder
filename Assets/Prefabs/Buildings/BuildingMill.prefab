@@ -97,6 +97,7 @@ MonoBehaviour:
   baseProduction: 0
   popUpPrefab: {fileID: 7543788039567795015, guid: d098349604c1b914b8f89b5dd6102ed6,
     type: 3}
+  descriptionData: {fileID: 11400000, guid: 7ed70a6e3e9a3f44fbc5b3e55773bf88, type: 2}
   collectionRange: 2
   bonusForBakery: 10
   bonusForBrewery: -10

@@ -8,6 +8,7 @@ public class Building : MonoBehaviour
 {
     public int baseProduction;
     public GameObject popUpPrefab;
+    public BuildingDescriptionData descriptionData;
     internal Tile locationTile;
     internal Vector3 initialScale;
     
