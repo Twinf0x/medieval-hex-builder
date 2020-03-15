@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Test_Farm_Pool
   m_EditorClassIdentifier: 
   items:
-  - prefab: {fileID: 2505863349357598904, guid: 488e82546bc22634e8133c03658e0e76,
+  - prefab: {fileID: 2415213297173280510, guid: 3f8d23797ffa5524ab56544fa8b7cf0f,
       type: 3}
     amount: {x: 4, y: 4}
-  - prefab: {fileID: 2505863349357598904, guid: 75949c39bd9210944b0f80d0a835746e,
+  - prefab: {fileID: 5098086021288559647, guid: 8877aaf1f88f50b41ae7fde35702469a,
       type: 3}
     amount: {x: 1, y: 1}

@@ -16,8 +16,6 @@ public class Tile : MonoBehaviour
     public Map map;
 
     [HideInInspector]
-    public Placeable localPlaceable = null;
-    [HideInInspector]
     public Building placedBuilding = null;
     public bool RepresentsHand { get { return type == TileType.Hand; } }
 
@@ -47,20 +45,6 @@ public class Tile : MonoBehaviour
     private void OnMouseExit()
     {
         hoverMarker.SetActive(false);
-    }
-
-    public void PlacePlaceable(Placeable placeable)
-    {
-        placeable.transform.position = transform.position;
-        placeable.transform.SetParent(transform);
-
-        this.localPlaceable = placeable;
-        placeable.SetLocation(this);
-
-        if(!RepresentsHand)
-        {
-            placeable.ReplaceWithBuilding();
-        }
     }
 
     public void PlaceBuilding(Building building)

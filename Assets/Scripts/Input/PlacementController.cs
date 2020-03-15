@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlacementController : MonoBehaviour
 {
     public static PlacementController instance;
 
-    private Placeable selectedPlaceable = null;
-    private Tile pickedUpFromTile = null;
-    private float lastPickUpTime = 0;
-    private float dragThreshold = 0.3f;
+    public Vector3 selectedCardOffset;
+
+    private Card selectedCard = null;
+    private bool justPickedUpACard = false;
 
     private void Awake() 
     {
@@ -26,72 +27,36 @@ public class PlacementController : MonoBehaviour
     private void Update()
     {
         CheckMouseActivity();
+        if(selectedCard != null)
+        {
+            PlaceCardNextToCursor(selectedCard);
+        }
     }
 
     private void CheckMouseActivity()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(justPickedUpACard)
         {
-            UpdateSelection();
-        }
-
-        if (Input.GetMouseButtonUp(0) && selectedPlaceable != null && (Time.time - lastPickUpTime) > dragThreshold)
-        {
-            TryPlacingSelection();
-        }
-    }
-
-    private void UpdateSelection()
-    {
-        var tempPlaceable = GetPlaceableFromMousePosition();
-        if(tempPlaceable == null)
-        {
+            justPickedUpACard = false;
             return;
         }
-        var tempTile = GetTileFromPlaceablePosition(tempPlaceable);
 
-        if (selectedPlaceable == null)
+        if (Input.GetMouseButtonUp(0) && selectedCard != null)
         {
-            SelectPlaceable(tempPlaceable, tempTile);
-        }
-        else
-        {
-            if(tempTile == null)
+            if(!IsMouseOverUI())
             {
-                selectedPlaceable.Reset();
-                SelectPlaceable(tempPlaceable, tempTile);
+                TryPlacingSelection();
+            }
+            else
+            {
+                PutCardBack();
             }
         }
-    }
-
-    private Placeable GetPlaceableFromMousePosition()
-    {
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var buildingsUnderMouse = Physics2D.OverlapAreaAll(mousePosition, mousePosition, LayerMask.GetMask("Building"));
-
-        foreach(var buildingCollider in buildingsUnderMouse)
-        {
-            var placeable = buildingCollider.gameObject.GetComponent<Placeable>();
-            if(placeable != null)
-            {
-                return placeable;
-            }
-        }
-
-        return null;
-    }
-
-    private void SelectPlaceable(Placeable placeable, Tile tile)
-    {
-        selectedPlaceable = placeable;
-        pickedUpFromTile = tile;
-        selectedPlaceable.PickUp();
-        lastPickUpTime = Time.time;
     }
 
     private void TryPlacingSelection()
     {
-        if(selectedPlaceable == null)
+        if(selectedCard == null)
         {
             return;
         }
@@ -102,24 +67,18 @@ public class PlacementController : MonoBehaviour
             return;
         }
 
-        if(selectedPlaceable.MeetsPlacementRestrictions(hoverTile))
+        if(selectedCard.MeetsPlacementRestriction(hoverTile))
         {
-            PlaceBuildingOnTile(selectedPlaceable, hoverTile);
+            GameObject buildingObj = Instantiate(selectedCard.buildingPrefab);
+            Building building = buildingObj.GetComponent<Building>(); 
+            PlaceBuildingOnTile(building, hoverTile);
+            Destroy(selectedCard.gameObject);
+            selectedCard = null;
         }
     }
 
-    public bool PlaceBuildingOnTile(Placeable building, Tile tile)
+    public void PlaceBuildingOnTile(Building building, Tile tile)
     {
-        pickedUpFromTile?.Free();
-        pickedUpFromTile = null;
-        
-        selectedPlaceable = tile.localPlaceable;
-        if(selectedPlaceable != null)
-        {
-            selectedPlaceable.PickUp();
-            selectedPlaceable.isInHand = true;
-        }
-
         Building buildingOnTile = tile.placedBuilding;
         if(buildingOnTile != null)
         {
@@ -128,23 +87,20 @@ public class PlacementController : MonoBehaviour
             Destroy(buildingOnTile.gameObject);
         }
         
-        building.Place();
-        tile.PlacePlaceable(building);
-        Hand.instance.RemovePlaceable(building);
-        building.isInHand = tile.RepresentsHand;
-        return true;
+        tile.PlaceBuilding(building);
+    }
+
+    public void PickCardUp(Card card)
+    {
+        Hand.instance.RemoveCard(card);
+        selectedCard = card;
+        justPickedUpACard = true;
     }
 
     private Tile GetTileFromMousePosition()
     {
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return GetTileFromWorldPosition(mousePosition);
-    }
-
-    private Tile GetTileFromPlaceablePosition(Placeable placeable)
-    {
-        var pos = placeable.transform.position;
-        return GetTileFromWorldPosition(pos);
     }
 
     private Tile GetTileFromWorldPosition(Vector3 position)
@@ -161,5 +117,24 @@ public class PlacementController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void PutCardBack()
+    {
+        Hand.instance.AddCard(selectedCard);
+        selectedCard = null;
+    }
+
+    public void PlaceCardNextToCursor(Card card)
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 newPosition = mousePosition + selectedCardOffset;
+
+        card.transform.position = newPosition;
     }
 }

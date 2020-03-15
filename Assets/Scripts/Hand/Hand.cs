@@ -6,20 +6,20 @@ public class Hand : MonoBehaviour
 {
     public static Hand instance;
 
-    public GameObject handTilePrefab;
-    private List<Placeable> placeablesInHand = new List<Placeable>();
-    private List<Tile> handTiles = new List<Tile>();
+    private List<Card> cardsInHand = new List<Card>();
+    //private List<Tile> handTiles = new List<Tile>();
 
     [Header("X is Minimum, Y is Maximum")]
-    public Vector2 handScales = new Vector2(0.6f, 1.4f);
-    public Vector2 handTileDistances = new Vector2(2f, 0.3f);
-    public Vector2 handTilesForDistances = new Vector2(2f, 8f);
+    public Vector2 handScales = new Vector2(1f, 0.5f);
+    public Vector2 handTileDistances = new Vector2(2f, 1f);
+    public Vector2 handTilesForDistances = new Vector2(2f, 10f);
+    public float handTileBaseWidth = 250f;
     private float leftmostHandPosition = 0f;
     private float handTileY = -1.5f;
     private float distanceBetweenHandTiles = 0.5f;
     private float currentHandScale = 1f;
 
-    public bool IsEmptyAfterPlacement { get{ return placeablesInHand.Count <= 1; } }
+    public bool IsEmptyAfterPlacement { get{ return cardsInHand.Count <= 0; } }
 
     private void Awake()
     {
@@ -33,59 +33,43 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void AddPlaceable(Placeable placeable)
+    public void AddCard(Card card)
     {
-        GameObject tileObject = Instantiate(handTilePrefab, transform.position, Quaternion.identity, transform);
-        Tile tile = tileObject.GetComponent<Tile>();
-        handTiles.Add(tile);
+        card.transform.SetParent(transform);
+        cardsInHand.Add(card);
         ArrangeHand();
-
-        PlacementController.instance.PlaceBuildingOnTile(placeable, tile);
-        placeablesInHand.Add(placeable);
     }
 
-    public void RemovePlaceable(Placeable placeable)
+    public void RemoveCard(Card card)
     {
-        int index = placeablesInHand.IndexOf(placeable);
+        int index = cardsInHand.IndexOf(card);
         if(index < 0)
         {
             return;
         }
 
-        placeablesInHand.RemoveAt(index);
-        Tile handTile = handTiles[index];
-        handTiles.Remove(handTile);
-        Destroy(handTile);
+        cardsInHand.RemoveAt(index);
+        //Destroy(card);
 
         ArrangeHand();
     }
 
     private void ArrangeHand()
     {
-        float handFillPercentage = Mathf.InverseLerp(handTilesForDistances.x, handTilesForDistances.y, handTiles.Count);
-        float unscaledDistance = Mathf.Lerp(handTileDistances.x, handTileDistances.y, handFillPercentage);
-        distanceBetweenHandTiles = unscaledDistance * currentHandScale;
-        leftmostHandPosition = ((handTiles.Count - 1) / 2f) * distanceBetweenHandTiles * -1;
+        float handFillPercentage = Mathf.InverseLerp(handTilesForDistances.x, handTilesForDistances.y, cardsInHand.Count);
+        float handTileScale = Mathf.Lerp(handScales.x, handScales.y, handFillPercentage);
+        Vector3 scale = new Vector3(handTileScale, handTileScale, handTileScale);
 
-        for(int i = 0; i < handTiles.Count; i++)
+        distanceBetweenHandTiles = Mathf.Lerp(handTileDistances.x, handTileDistances.y, handFillPercentage) * handTileBaseWidth * handTileScale;
+        leftmostHandPosition = ((cardsInHand.Count - 1) / 2f) * distanceBetweenHandTiles * -1;
+
+        for(int i = 0; i < cardsInHand.Count; i++)
         {
-            Vector3 temp = handTiles[i].transform.localPosition;
+            Vector3 temp = cardsInHand[i].transform.localPosition;
             temp = new Vector3(leftmostHandPosition + (i * distanceBetweenHandTiles), handTileY, temp.z);
-            handTiles[i].transform.localPosition = temp;
-        }
-    }
+            cardsInHand[i].transform.localPosition = temp;
 
-    public void AdjustToCameraSize(float size)
-    {
-        handTileY = -0.8f * size;
-        float scrollFactor = Mathf.InverseLerp(CameraController.instance.sizeRestrictions.x, CameraController.instance.sizeRestrictions.y, size);
-        float handScale = Mathf.Lerp(handScales.x, handScales.y, scrollFactor);
-        currentHandScale = handScale;
-        foreach(Tile tile in handTiles)
-        {
-            tile.transform.localScale = new Vector3(handScale, handScale, handScale);
+            cardsInHand[i].transform.localScale = scale;
         }
-
-        ArrangeHand();
     }
 }

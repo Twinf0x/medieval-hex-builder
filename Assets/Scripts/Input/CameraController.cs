@@ -167,7 +167,6 @@ public class CameraController : MonoBehaviour
         {
             timer += Time.deltaTime;
             mainCamera.orthographicSize += changePerSecond * Time.deltaTime;
-            Hand.instance.AdjustToCameraSize(mainCamera.orthographicSize);
             yield return null;
         }
 

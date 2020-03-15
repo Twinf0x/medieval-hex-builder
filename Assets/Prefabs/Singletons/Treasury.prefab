@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseThreshold: 10
-  growthFactorOne: 0.75
+  growthFactorOne: 0.7
   growthFactorTwo: 0.25
   levelProgressBar: {fileID: 0}
   moneyIndicator: {fileID: 0}

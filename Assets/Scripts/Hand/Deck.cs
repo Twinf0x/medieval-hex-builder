@@ -11,7 +11,7 @@ public class Deck : MonoBehaviour
     public int initialDrawAmount = 5;
 
     public List<Pool> levelPools = new List<Pool>();
-    private Queue<GameObject> currentTileDeck = new Queue<GameObject>();
+    private Queue<GameObject> currentDeck = new Queue<GameObject>();
     private int currentLevel = 0;
 
     private void Awake()
@@ -40,15 +40,15 @@ public class Deck : MonoBehaviour
     {
         for(int i = 0; i < amount; i++)
         {
-            if(currentTileDeck.Count <= 0)
+            if(currentDeck.Count <= 0)
             {
-                currentTileDeck = GenerateNextDeck();
+                currentDeck = GenerateNextDeck();
             }
 
-            GameObject placeableObject = Instantiate(currentTileDeck.Dequeue());
-            Placeable placeable = placeableObject.GetComponent<Placeable>();
+            GameObject cardObject = Instantiate(currentDeck.Dequeue());
+            Card card = cardObject.GetComponent<Card>();
 
-            Hand.instance.AddPlaceable(placeable);
+            Hand.instance.AddCard(card);
         }
     }
 
