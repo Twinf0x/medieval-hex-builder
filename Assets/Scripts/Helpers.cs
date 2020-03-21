@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 using Random = System.Random;
 
@@ -38,5 +39,10 @@ public static class Helpers
             list[k] = list[n];  
             list[n] = value;  
         }  
+    }
+
+    public static bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

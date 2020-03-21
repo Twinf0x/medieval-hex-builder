@@ -43,7 +43,7 @@ public class PlacementController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && selectedCard != null)
         {
-            if(!IsMouseOverUI())
+            if(!Helpers.IsMouseOverUI())
             {
                 TryPlacingSelection();
             }
@@ -117,11 +117,6 @@ public class PlacementController : MonoBehaviour
         }
 
         return null;
-    }
-
-    private bool IsMouseOverUI()
-    {
-        return EventSystem.current.IsPointerOverGameObject();
     }
 
     private void PutCardBack()

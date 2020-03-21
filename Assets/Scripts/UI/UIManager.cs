@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
         tileDescription.SetData(data);
     }
 
+    public void HideTileDescription()
+    {
+        tileDescription.Hide();
+    }
+
     public void ShowBuildingDescription(BuildingDescriptionData data) 
     {
         if(data == null) 

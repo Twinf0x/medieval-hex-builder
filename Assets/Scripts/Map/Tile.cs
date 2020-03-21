@@ -30,7 +30,14 @@ public class Tile : MonoBehaviour
     private void OnMouseEnter()
     {
         hoverMarker.SetActive(true);
-        UIManager.instance.ShowTileDescription(descriptionData);
+        if(!Helpers.IsMouseOverUI())
+        {
+            UIManager.instance.ShowTileDescription(descriptionData);
+        }
+        else
+        {
+            UIManager.instance.HideTileDescription();
+        }
 
         if(placedBuilding != null) 
         {
