@@ -8,7 +8,7 @@ public class Mill : Building
     public int bonusForBakery = 10;
     public int bonusForBrewery = -10;
 
-    public override void Produce()
+    public override int CalculateProduction()
     {
         List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
@@ -33,10 +33,6 @@ public class Mill : Building
             }
         }
 
-        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
-        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = (collectedFunds + baseProduction).ToString();
-
-        Treasury.instance.AddMoney(collectedFunds + baseProduction);
+        return collectedFunds;
     }
 }

@@ -32,20 +32,20 @@ public class Tile : MonoBehaviour
         hoverMarker.SetActive(true);
         if(!Helpers.IsMouseOverUI())
         {
-            UIManager.instance.ShowTileDescription(descriptionData);
+            UIManager.instance?.ShowTileDescription(descriptionData);
         }
         else
         {
-            UIManager.instance.HideTileDescription();
+            UIManager.instance?.HideTileDescription();
         }
 
         if(placedBuilding != null) 
         {
-            UIManager.instance.ShowBuildingDescription(placedBuilding.descriptionData);
+            UIManager.instance?.ShowBuildingDescription(placedBuilding.descriptionData);
         }
         else
         {
-            UIManager.instance.HideBuildingDescription();
+            UIManager.instance?.HideBuildingDescription();
         }
     }
 

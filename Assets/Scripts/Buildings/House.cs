@@ -7,37 +7,23 @@ public class House : Building
     public int bonusPerHouse = 6;
     public int range;
 
-    public int TotalProduction
+    public override int CalculateProduction()
     {
-        get
+        int total = baseProduction;
+        List<Tile> tilesInRange = locationTile.GetAllTilesAround(range);
+        foreach(Tile tile in tilesInRange)
         {
-            int total = baseProduction;
-            List<Tile> tilesInRange = locationTile.GetAllTilesAround(range);
-            foreach(Tile tile in tilesInRange)
+            if(tile.placedBuilding == null)
             {
-                if(tile.placedBuilding == null)
-                {
-                    continue;
-                }
-
-                if(tile.placedBuilding.GetType().Name == "House")
-                {
-                    total += bonusPerHouse;
-                }
+                continue;
             }
 
-            return total;
+            if(tile.placedBuilding.GetType().Name == "House")
+            {
+                total += bonusPerHouse;
+            }
         }
-    }
 
-    public override void Produce()
-    {
-        int temp = TotalProduction;
-        
-        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
-        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = temp.ToString();
-
-        Treasury.instance.AddMoney(temp);
+        return total;
     }
 }

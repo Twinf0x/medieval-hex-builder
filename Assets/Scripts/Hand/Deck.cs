@@ -9,6 +9,7 @@ public class Deck : MonoBehaviour
 
     [ContextMenuItem("Draw", "DrawToHand")]
     public int initialDrawAmount = 5;
+    public float drawDuration = 1f;
 
     public List<Pool> levelPools = new List<Pool>();
     private Queue<GameObject> currentDeck = new Queue<GameObject>();
@@ -26,11 +27,6 @@ public class Deck : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        instance.DrawToHand(initialDrawAmount);
-    }
-
     public void DrawToHand()
     {
         DrawToHand(initialDrawAmount);
@@ -38,6 +34,13 @@ public class Deck : MonoBehaviour
 
     public void DrawToHand(int amount)
     {
+        StartCoroutine(DrawCards(amount, drawDuration));
+    }
+
+    private IEnumerator DrawCards(int amount, float duration)
+    {
+        float timeBetweenDraws = duration / amount;
+
         for(int i = 0; i < amount; i++)
         {
             if(currentDeck.Count <= 0)
@@ -49,6 +52,7 @@ public class Deck : MonoBehaviour
             Card card = cardObject.GetComponent<Card>();
 
             Hand.instance.AddCard(card);
+            yield return new WaitForSeconds(timeBetweenDraws);
         }
     }
 

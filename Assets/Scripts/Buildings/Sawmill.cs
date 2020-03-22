@@ -6,7 +6,7 @@ public class Sawmill : Building
 {
     public int collectionRange = 2;
 
-    public override void Produce()
+    public override int CalculateProduction()
     {
         List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
@@ -16,14 +16,10 @@ public class Sawmill : Building
             if(tile.placedBuilding != null && tile.placedBuilding is Woodcutter)
             {
                 Woodcutter woodcutter = tile.placedBuilding as Woodcutter;
-                collectedFunds += woodcutter.TotalProduction;
+                collectedFunds += woodcutter.CalculateProduction();
             }
         }
 
-        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
-        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = (collectedFunds + baseProduction).ToString();
-
-        Treasury.instance.AddMoney(collectedFunds + baseProduction);
+        return collectedFunds;
     }
 }

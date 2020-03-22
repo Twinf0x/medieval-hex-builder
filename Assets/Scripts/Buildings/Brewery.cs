@@ -7,7 +7,7 @@ public class Brewery : Building
     public int collectionRange = 2;
     public int bonusForMill = -6;
     
-    public override void Produce()
+    public override int CalculateProduction()
     {
         List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
@@ -31,11 +31,7 @@ public class Brewery : Building
                 collectedFunds += field.bonusForBrewery;
             }
         }
-
-        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
-        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = (collectedFunds + baseProduction).ToString();
         
-        Treasury.instance.AddMoney(collectedFunds + baseProduction);
+        return collectedFunds + baseProduction;
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695e9a4fc3949004b93788c7e31081a1, type: 3}
   m_Name: BuildingWoodcutterDescription
   m_EditorClassIdentifier: 
-  title: Woodcutter
+  title: Lumberjack
   description: Produces 1G for every forest in 1 tile range

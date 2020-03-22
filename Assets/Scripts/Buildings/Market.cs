@@ -7,7 +7,7 @@ public class Market : Building
     public int collectionRange = 2;
     public int bonusForChurch = -15;
 
-    public override void Produce()
+    public override int CalculateProduction()
     {
         List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
@@ -22,7 +22,7 @@ public class Market : Building
             if(tile.placedBuilding is House)
             {
                 House house = tile.placedBuilding as House;
-                collectedFunds += house.TotalProduction;
+                collectedFunds += house.CalculateProduction();
             }
 
             if(tile.placedBuilding is Church)
@@ -32,10 +32,6 @@ public class Market : Building
             }
         }
 
-        GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
-        NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = (collectedFunds + baseProduction).ToString();        
-
-        Treasury.instance.AddMoney(collectedFunds + baseProduction);
+        return collectedFunds;
     }
 }

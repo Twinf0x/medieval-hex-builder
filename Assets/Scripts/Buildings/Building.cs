@@ -25,12 +25,19 @@ public class Building : MonoBehaviour
         Treasury.instance.StartCollectingMoney();
     }
 
+    public virtual int CalculateProduction()
+    {
+        return baseProduction;
+    }
+
     public virtual void Produce()
     {
+        int production = CalculateProduction();
+
         GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
         NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
-        popUp.text.text = baseProduction.ToString();
+        popUp.text.text = production.ToString();
 
-        Treasury.instance.AddMoney(baseProduction);
+        Treasury.instance.AddMoney(production);
     }
 }
