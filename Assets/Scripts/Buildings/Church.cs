@@ -7,27 +7,27 @@ public class Church : Building
     public int collectionRange = 2;
     public int bonusForMarket = -15;
     
-    public override int CalculateProduction()
+    public override int CalculateProduction(Tile tile)
     {
-        List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
+        List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
 
-        foreach(var tile in tilesInRange)
+        foreach(var tempTile in tilesInRange)
         {
-            if(tile.placedBuilding == null)
+            if(tempTile.placedBuilding == null)
             {
                 continue;
             }
 
-            if(tile.placedBuilding is House)
+            if(tempTile.placedBuilding is House)
             {
-                House house = tile.placedBuilding as House;
+                House house = tempTile.placedBuilding as House;
                 collectedFunds += house.CalculateProduction();
             }
 
-            if(tile.placedBuilding is Market)
+            if(tempTile.placedBuilding is Market)
             {
-                Market market = tile.placedBuilding as Market;
+                Market market = tempTile.placedBuilding as Market;
                 collectedFunds += market.bonusForChurch;
             }
         }

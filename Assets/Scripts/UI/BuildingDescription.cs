@@ -8,6 +8,7 @@ public class BuildingDescription : MonoBehaviour
 {
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI productionText;
 
     public void Show() 
     {
@@ -19,9 +20,10 @@ public class BuildingDescription : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetData(BuildingDescriptionData data)
+    public void SetData(Building building)
     {
-        titleText.text = data.title;
-        descriptionText.text = data.description;
+        titleText.text = building.descriptionData.title;
+        descriptionText.text = building.descriptionData.description;
+        productionText.text = "+" + building.CalculateProduction().ToString();
     }
 }

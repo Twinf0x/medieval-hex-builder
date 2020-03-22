@@ -41,12 +41,14 @@ public class Tile : MonoBehaviour
 
         if(placedBuilding != null) 
         {
-            UIManager.instance?.ShowBuildingDescription(placedBuilding.descriptionData);
+            UIManager.instance?.ShowBuildingDescription(placedBuilding);
         }
         else
         {
             UIManager.instance?.HideBuildingDescription();
         }
+
+        PlacementController.instance?.UpdateCardProduction(this);
     }
 
     private void OnMouseExit()

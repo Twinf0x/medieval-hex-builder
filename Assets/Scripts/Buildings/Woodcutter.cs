@@ -6,13 +6,13 @@ public class Woodcutter : Building
 {
     public int bonusPerForest = 1;
 
-    public override int CalculateProduction()
+    public override int CalculateProduction(Tile tile)
     {
         int forestsInRange = 0;
-        List<Tile> tilesInRange = locationTile.GetAllTilesAround(1);
-        foreach(Tile tile in tilesInRange)
+        List<Tile> tilesInRange = tile.GetAllTilesAround(1);
+        foreach(Tile tempTile in tilesInRange)
         {
-            if(tile.type == TileType.Forest)
+            if(tempTile.type == TileType.Forest)
                 forestsInRange++;
         }
 

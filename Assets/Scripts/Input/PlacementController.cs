@@ -99,6 +99,7 @@ public class PlacementController : MonoBehaviour
         
         Hand.instance.RemoveCard(card);
         selectedCard = card;
+        card.ShowProductionPreview();
         justPickedUpACard = true;
     }
 
@@ -127,6 +128,7 @@ public class PlacementController : MonoBehaviour
     private void PutCardBack()
     {
         Hand.instance.AddCard(selectedCard);
+        selectedCard.HideProductionPreview();
         selectedCard = null;
     }
 
@@ -136,5 +138,15 @@ public class PlacementController : MonoBehaviour
         Vector3 newPosition = mousePosition + selectedCardOffset;
 
         card.transform.position = newPosition;
+    }
+
+    public void UpdateCardProduction(Tile hoverTile)
+    {
+        if(selectedCard == null)
+        {
+            return;
+        }
+
+        selectedCard.UpdateProductionPreview(hoverTile);
     }
 }

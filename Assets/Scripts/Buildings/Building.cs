@@ -25,7 +25,12 @@ public class Building : MonoBehaviour
         Treasury.instance.StartCollectingMoney();
     }
 
-    public virtual int CalculateProduction()
+    public int CalculateProduction()
+    {
+        return CalculateProduction(locationTile);
+    }
+
+    public virtual int CalculateProduction(Tile tile)
     {
         return baseProduction;
     }

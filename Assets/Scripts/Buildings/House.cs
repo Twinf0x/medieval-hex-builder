@@ -7,18 +7,18 @@ public class House : Building
     public int bonusPerHouse = 6;
     public int range;
 
-    public override int CalculateProduction()
+    public override int CalculateProduction(Tile tile)
     {
         int total = baseProduction;
-        List<Tile> tilesInRange = locationTile.GetAllTilesAround(range);
-        foreach(Tile tile in tilesInRange)
+        List<Tile> tilesInRange = tile.GetAllTilesAround(range);
+        foreach(Tile tempTile in tilesInRange)
         {
-            if(tile.placedBuilding == null)
+            if(tempTile.placedBuilding == null)
             {
                 continue;
             }
 
-            if(tile.placedBuilding.GetType().Name == "House")
+            if(tempTile.placedBuilding.GetType().Name == "House")
             {
                 total += bonusPerHouse;
             }

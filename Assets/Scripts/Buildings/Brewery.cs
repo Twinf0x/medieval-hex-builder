@@ -7,27 +7,27 @@ public class Brewery : Building
     public int collectionRange = 2;
     public int bonusForMill = -6;
     
-    public override int CalculateProduction()
+    public override int CalculateProduction(Tile tile)
     {
-        List<Tile> tilesInRange = locationTile.GetAllTilesAround(collectionRange);
+        List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
         int collectedFunds = baseProduction;
 
-        foreach(var tile in tilesInRange)
+        foreach(var tempTile in tilesInRange)
         {
-            if(tile.placedBuilding == null)
+            if(tempTile.placedBuilding == null)
             {
                 continue;
             }
 
-            if(tile.placedBuilding is Mill)
+            if(tempTile.placedBuilding is Mill)
             {
-                Mill mill = tile.placedBuilding as Mill;
+                Mill mill = tempTile.placedBuilding as Mill;
                 collectedFunds += mill.bonusForBrewery;
             }
 
-            if(tile.placedBuilding is Field)
+            if(tempTile.placedBuilding is Field)
             {
-                Field field = tile.placedBuilding as Field;
+                Field field = tempTile.placedBuilding as Field;
                 collectedFunds += field.bonusForBrewery;
             }
         }

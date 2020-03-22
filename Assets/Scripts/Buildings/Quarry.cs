@@ -6,13 +6,13 @@ public class Quarry : Building
 {
     public int bonusPerMountain = 1;
 
-    public override int CalculateProduction()
+    public override int CalculateProduction(Tile tile)
     {
         int mountainsInRange = 0;
-        List<Tile> tilesInRange = locationTile.GetAllTilesAround(1);
-        foreach(Tile tile in tilesInRange)
+        List<Tile> tilesInRange = tile.GetAllTilesAround(1);
+        foreach(Tile tempTile in tilesInRange)
         {
-            if(tile.type == TileType.Mountain)
+            if(tempTile.type == TileType.Mountain)
                 mountainsInRange++;
         }
 
