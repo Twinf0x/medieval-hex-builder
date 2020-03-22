@@ -92,6 +92,11 @@ public class PlacementController : MonoBehaviour
 
     public void PickCardUp(Card card)
     {
+        if(selectedCard != null)
+        {
+            PutCardBack();
+        }
+        
         Hand.instance.RemoveCard(card);
         selectedCard = card;
         justPickedUpACard = true;

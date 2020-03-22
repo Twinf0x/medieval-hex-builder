@@ -20,9 +20,9 @@ public class Building : MonoBehaviour
     public void PlaceOn(Tile tile)
     {
         this.locationTile = tile;
-        StartCoroutine(SimpleAnimations.instance.Squash(transform, 0.25f, 1, () => this.transform.localScale = initialScale));
+        StartCoroutine(SimpleAnimations.instance.Squash(transform, 0.5f, 1, () => this.transform.localScale = initialScale));
         Treasury.instance.allPlacedBuildings.Add(this);
-        Treasury.instance.CollectMoney();
+        Treasury.instance.StartCollectingMoney();
     }
 
     public virtual void Produce()

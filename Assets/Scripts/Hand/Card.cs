@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerEnterHandler
 {
     public string displayName;
     public GameObject buildingPrefab;
@@ -15,10 +16,9 @@ public class Card : MonoBehaviour
         displayText.text = displayName;
     }
 
-    private void OnMouseEnter() 
+    public void OnPointerEnter(PointerEventData data) 
     {
-
-        StartCoroutine(SimpleAnimations.instance.Wobble(transform, 0.25f, 1, null));
+        StartCoroutine(SimpleAnimations.instance.Wobble(transform, 0.25f, 1, () => transform.localScale = Hand.instance.CardScale ));
     }
 
     public void PickFromHand() 

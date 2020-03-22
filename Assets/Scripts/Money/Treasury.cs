@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class Treasury : MonoBehaviour
     public int baseThreshold = 10;
     public float growthFactorOne = 1f;
     public float growthFactorTwo = 0.33f;
+    public float defaultTimeBetweenCollections = 0.25f;
+    public float maxMoneyCollectionDuration = 2.5f;
     public Slider levelProgressBar;
     public Transform moneyIndicator;
     public TextMeshProUGUI moneyText;
@@ -45,16 +48,47 @@ public class Treasury : MonoBehaviour
         }
     }
 
-    public void CollectMoney()
+    public void StartCollectingMoney()
     {
+        if(allPlacedBuildings.Count == 1)
+        {
+            allPlacedBuildings.First().Produce();
+            AudioManager.instance?.Play("Coins");
+            moneyText.text = currentMoney.ToString();
+            StartCoroutine(SimpleAnimations.instance.Wobble(moneyIndicator, 0.25f, 1, () => moneyIndicator.localScale = indicatorScale));
+
+            if(Hand.instance.IsEmptyAfterPlacement)
+            {
+                Lose();
+            }
+        }
+        else
+        {
+            float moneyCollectionDuration = Mathf.Min(allPlacedBuildings.Count * defaultTimeBetweenCollections, maxMoneyCollectionDuration);
+            StartCoroutine(CollectMoney(moneyCollectionDuration));
+        }
+    }
+
+    public IEnumerator CollectMoney(float duration)
+    {
+        if(allPlacedBuildings.Count == 1)
+        {
+            yield break;
+        }
+
+        float timeBetweenCollections = duration / (allPlacedBuildings.Count - 1);
+
+        Hand.instance.DeactivateHand();
         foreach(Building building in allPlacedBuildings)
         {
             building.Produce();
             AudioManager.instance?.Play("Coins");
-        }
 
-        moneyText.text = currentMoney.ToString();
-        StartCoroutine(SimpleAnimations.instance.Wobble(moneyIndicator, 0.25f, 1, () => moneyIndicator.localScale = indicatorScale));
+            moneyText.text = currentMoney.ToString();
+            StartCoroutine(SimpleAnimations.instance.Wobble(moneyIndicator, timeBetweenCollections, 1, () => moneyIndicator.localScale = indicatorScale));
+            yield return new WaitForSeconds(timeBetweenCollections);
+        }
+        Hand.instance.ActivateHand();
 
         if(Hand.instance.IsEmptyAfterPlacement)
         {

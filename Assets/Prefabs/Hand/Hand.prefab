@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2227168538384208738}
+  - component: {fileID: 5747969178709309638}
   - component: {fileID: 231745947384736767}
   m_Layer: 0
   m_Name: Hand
@@ -17,8 +17,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2227168538384208738
-Transform:
+--- !u!224 &5747969178709309638
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -31,6 +31,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &231745947384736767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,9 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78ec1f3e2640f3438d1296b3917e0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTilePrefab: {fileID: 5959729843891577882, guid: e3b9ab6258a478f43a4d12ca7bb23bd7,
-    type: 3}
-  handScales: {x: 1, y: 0.5}
-  handTileDistances: {x: 2, y: 1}
+  handScales: {x: 1, y: 0.75}
+  handTileDistances: {x: 1.5, y: 0.9}
   handTilesForDistances: {x: 2, y: 10}
-  handTileBaseWidth: 250
+  handTileBaseWidth: 200

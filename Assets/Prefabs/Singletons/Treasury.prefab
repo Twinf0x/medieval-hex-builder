@@ -46,6 +46,8 @@ MonoBehaviour:
   baseThreshold: 10
   growthFactorOne: 0.7
   growthFactorTwo: 0.25
+  defaultTimeBetweenCollections: 0.25
+  maxMoneyCollectionDuration: 2.5
   levelProgressBar: {fileID: 0}
   moneyIndicator: {fileID: 0}
   moneyText: {fileID: 0}

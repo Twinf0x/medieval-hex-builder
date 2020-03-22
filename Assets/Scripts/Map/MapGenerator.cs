@@ -122,6 +122,7 @@ public class MapGenerator : MonoBehaviour
         float yOffset = 10f;
         float timeBetweenTiles = duration / map.tiles.Count;
 
+        Hand.instance.DeactivateHand();
         foreach(var tile in map.tiles.Values)
         {
             Vector3 tempPos = tile.transform.localPosition;
@@ -133,6 +134,7 @@ public class MapGenerator : MonoBehaviour
             StartCoroutine(SimpleAnimations.instance.Translate(tile.transform, dropDuration, new Vector3(0f, -1 * yOffset, 0f)));
             yield return new WaitForSeconds(timeBetweenTiles);
         }
+        Hand.instance.ActivateHand();
     }
 
     public Map CreateOcean()
