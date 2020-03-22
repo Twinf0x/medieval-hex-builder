@@ -24,6 +24,12 @@ public class House : Building
             }
         }
 
+        //Add the house itself if it isn't placed yet for preview purposes
+        if(this.locationTile == null)
+        {
+            total += bonusPerHouse;
+        }
+
         return total;
     }
 }
