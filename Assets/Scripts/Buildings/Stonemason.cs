@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Stonemason : Building
 {
-    public int collectionRange = 2;
-
     public override int CalculateProduction(Tile tile)
     {
         List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
@@ -21,5 +19,16 @@ public class Stonemason : Building
         }
 
         return collectedFunds;
+    }
+
+    internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
+    {
+        if(newNeighbour is Quarry)
+        {
+            Quarry quarry = newNeighbour as Quarry;
+            return quarry.CalculateProduction(neighbourTile);
+        }
+
+        return 0;
     }
 }

@@ -9,7 +9,7 @@ public class Woodcutter : Building
     public override int CalculateProduction(Tile tile)
     {
         int forestsInRange = 0;
-        List<Tile> tilesInRange = tile.GetAllTilesAround(1);
+        List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
         foreach(Tile tempTile in tilesInRange)
         {
             if(tempTile.type == TileType.Forest)

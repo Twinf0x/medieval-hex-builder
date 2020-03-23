@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Church : Building
 {
-    public int collectionRange = 2;
     public int bonusForMarket = -15;
     
     public override int CalculateProduction(Tile tile)
@@ -33,5 +32,22 @@ public class Church : Building
         }
 
         return collectedFunds;
+    }
+
+    internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
+    {
+        if(newNeighbour is House)
+        {
+            House house = newNeighbour as House;
+            return house.CalculateProduction(neighbourTile);
+        }
+
+        if(newNeighbour is Market)
+        {
+            Market market = newNeighbour as Market;
+            return market.bonusForChurch;
+        }
+
+        return 0;
     }
 }

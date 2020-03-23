@@ -43,6 +43,19 @@ public static class Helpers
 
     public static bool IsMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        PointerEventData data = new PointerEventData(EventSystem.current);
+        data.position = Input.mousePosition;
+        
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current?.RaycastAll(data, results);
+        foreach(var result in results)
+        {
+            if(result.gameObject.GetComponent<UIClickThrough>() == null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

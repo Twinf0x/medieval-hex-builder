@@ -88,6 +88,11 @@ public class PlacementController : MonoBehaviour
         }
         
         tile.PlaceBuilding(building);
+
+        foreach(Building tempBuilding in Treasury.instance.allPlacedBuildings)
+        {
+            tempBuilding.HideChangeIndicator();
+        }
     }
 
     public void PickCardUp(Card card)
@@ -148,5 +153,27 @@ public class PlacementController : MonoBehaviour
         }
 
         selectedCard.UpdateProductionPreview(hoverTile);
+    }
+
+    public void IndicateProductionChanges(Tile hoverTile)
+    {
+        if(selectedCard == null)
+        {
+            return;
+        }
+
+        Building potentialNewBuilding = selectedCard.buildingPrefab.GetComponent<Building>();
+
+        foreach(Building building in Treasury.instance.allPlacedBuildings)
+        {
+            List<Tile> tilesInRange = building.GetTilesInRange();
+            if(!tilesInRange.Contains(hoverTile))
+            {
+                building.HideChangeIndicator();
+                continue;
+            }
+
+            building.IndicateProductionChanges(potentialNewBuilding, hoverTile);
+        }
     }
 }

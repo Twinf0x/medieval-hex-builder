@@ -49,6 +49,7 @@ public class Tile : MonoBehaviour
         }
 
         PlacementController.instance?.UpdateCardProduction(this);
+        PlacementController.instance?.IndicateProductionChanges(this);
     }
 
     private void OnMouseExit()

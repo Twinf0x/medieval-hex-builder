@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Mill : Building
 {
-    public int collectionRange = 2;
     public int bonusForBakery = 10;
     public int bonusForBrewery = -10;
 
@@ -34,5 +33,22 @@ public class Mill : Building
         }
 
         return collectedFunds;
+    }
+
+    internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
+    {
+        if(newNeighbour is Brewery)
+        {
+            Brewery brewery = newNeighbour as Brewery;
+            return brewery.bonusForMill;
+        }
+
+        if(newNeighbour is Field)
+        {
+            Field field = newNeighbour as Field;
+            return field.bonusForMill;
+        }
+
+        return 0;
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Sawmill : Building
 {
-    public int collectionRange = 2;
-
     public override int CalculateProduction(Tile tile)
     {
         List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
@@ -21,5 +19,16 @@ public class Sawmill : Building
         }
 
         return collectedFunds;
+    }
+
+    internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
+    {
+        if(newNeighbour is Woodcutter)
+        {
+            Woodcutter woodcutter = newNeighbour as Woodcutter;
+            return woodcutter.CalculateProduction(neighbourTile);
+        }
+
+        return 0;
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Bakery : Building
 {
-    public int collectionRange = 2;
-
     public override int CalculateProduction(Tile tile)
     {
         List<Tile> tilesInRange = tile.GetAllTilesAround(collectionRange);
@@ -26,5 +24,16 @@ public class Bakery : Building
         }
 
         return collectedFunds;
+    }
+
+    internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
+    {
+        if(newNeighbour is Mill)
+        {
+            Mill mill = newNeighbour as Mill;
+            return mill.bonusForBakery;
+        }
+
+        return 0;
     }
 }
