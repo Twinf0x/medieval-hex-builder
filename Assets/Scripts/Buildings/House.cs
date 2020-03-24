@@ -34,12 +34,18 @@ public class House : Building
 
     internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
     {
+        int change = 0;
+
         if(newNeighbour is House)
         {
-            House house = newNeighbour as House;
-            return house.bonusPerHouse;
+            change += bonusPerHouse;
         }
 
-        return 0;
+        if(neighbourTile.placedBuilding != null && neighbourTile.placedBuilding is House)
+        {
+            change -= bonusPerHouse;
+        }
+
+        return change;
     }
 }

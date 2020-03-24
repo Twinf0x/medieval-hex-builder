@@ -135,6 +135,11 @@ public class PlacementController : MonoBehaviour
         Hand.instance.AddCard(selectedCard);
         selectedCard.HideProductionPreview();
         selectedCard = null;
+
+        foreach(Building tempBuilding in Treasury.instance.allPlacedBuildings)
+        {
+            tempBuilding.HideChangeIndicator();
+        }
     }
 
     public void PlaceCardNextToCursor(Card card)

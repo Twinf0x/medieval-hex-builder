@@ -36,6 +36,8 @@ public class Brewery : Building
 
     internal override int CalculateProductionChanges(Building newNeighbour, Tile neighbourTile)
     {
+        int change = 0;
+
         if(newNeighbour is Mill)
         {
             Mill mill = newNeighbour as Mill;
@@ -48,6 +50,21 @@ public class Brewery : Building
             return field.bonusForBrewery;
         }
 
-        return 0;
+        if(neighbourTile.placedBuilding != null)
+        {
+            if(neighbourTile.placedBuilding is Mill)
+            {
+                Mill mill = neighbourTile.placedBuilding as Mill;
+                change -= mill.bonusForBrewery;
+            }
+
+            if(neighbourTile.placedBuilding is Field)
+            {
+                Field field = neighbourTile.placedBuilding as Field;
+                change -= field.bonusForBrewery;
+            }
+        }
+
+        return change;
     }
 }
