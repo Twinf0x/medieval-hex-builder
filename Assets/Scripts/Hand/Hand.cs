@@ -38,6 +38,7 @@ public class Hand : MonoBehaviour
     {
         card.transform.SetParent(transform);
         cardsInHand.Add(card);
+        AudioManager.instance?.Play("CardDraw");
         ArrangeHand();
     }
 

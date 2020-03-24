@@ -88,6 +88,7 @@ public class PlacementController : MonoBehaviour
         }
         
         tile.PlaceBuilding(building);
+        AudioManager.instance?.Play("Build");
 
         foreach(Building tempBuilding in Treasury.instance.allPlacedBuildings)
         {

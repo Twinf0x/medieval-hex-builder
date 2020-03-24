@@ -41,13 +41,13 @@ public class Brewery : Building
         if(newNeighbour is Mill)
         {
             Mill mill = newNeighbour as Mill;
-            return mill.bonusForBrewery;
+            change += mill.bonusForBrewery;
         }
 
         if(newNeighbour is Field)
         {
             Field field = newNeighbour as Field;
-            return field.bonusForBrewery;
+            change += field.bonusForBrewery;
         }
 
         if(neighbourTile.placedBuilding != null)

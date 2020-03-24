@@ -29,6 +29,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler
     public void PickFromHand() 
     {
         PlacementController.instance.PickCardUp(this);
+        StartCoroutine(SimpleAnimations.instance.Stretch(transform, 0.25f, 1, () => transform.localScale = Hand.instance.CardScale ));
     }
 
     public bool MeetsPlacementRestriction(Tile tile) 

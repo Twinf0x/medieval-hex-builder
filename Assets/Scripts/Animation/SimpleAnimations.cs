@@ -147,4 +147,29 @@ public class SimpleAnimations : MonoBehaviour
         transform.localPosition = initialPosition + translation;
         callback?.Invoke();
     }
+
+    public IEnumerator Shrink(Transform transform, float duration, float startFactor, float endFactor, Action callback = null)
+    {
+        float timer = 0f;
+        float percentage = timer / duration;
+        float currentFactor = startFactor;
+        Vector3 initialScale = transform.localScale;
+
+        Vector3 currentScale = initialScale * currentFactor;
+        transform.localScale = currentScale;
+        yield return null;
+
+        while(timer < duration)
+        {
+            timer += duration;
+            percentage = timer / duration;
+            currentFactor = Mathf.Lerp(startFactor, endFactor, percentage);
+            currentScale = initialScale * currentFactor;
+            transform.localScale = currentScale;
+            yield return null;
+        }
+
+        transform.localScale = initialScale * endFactor;
+        callback?.Invoke();
+    }
 }
