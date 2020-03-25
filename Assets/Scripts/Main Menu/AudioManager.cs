@@ -33,8 +33,6 @@ public class AudioManager : MonoBehaviour
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
         }
-
-        Play("Theme");
     }
 
     public void Play(string name)
@@ -48,5 +46,13 @@ public class AudioManager : MonoBehaviour
     {
         var sound = Array.Find(sounds, s => s.name == name);
         sound?.source.Stop();
+    }
+
+    public void StopAll()
+    {
+        foreach(Sound sound in sounds)
+        {
+            sound.source.Stop();
+        }
     }
 }

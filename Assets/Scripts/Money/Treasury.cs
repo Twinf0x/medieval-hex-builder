@@ -48,6 +48,12 @@ public class Treasury : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        AudioManager.instance?.StopAll();
+        AudioManager.instance?.Play("GameTheme");
+    }
+
     public void StartCollectingMoney()
     {
         if(allPlacedBuildings.Count == 1)
@@ -117,7 +123,10 @@ public class Treasury : MonoBehaviour
         levelText.text = currentLevel.ToString();
 
         if(currentLevel > 1)
+        {
+            AudioManager.instance?.Play("LevelUp");
             Deck.instance.DrawToHand();
+        }
     }
 
     public int GetThresholdForLevel(int level)
@@ -130,5 +139,8 @@ public class Treasury : MonoBehaviour
     {
         gameOverMoneyText.text = $"You earned {currentMoney.ToString()} Gold!";
         gameOverScreen.SetActive(true);
+        AudioManager.instance?.Stop("GameTheme");
+        AudioManager.instance?.Play("GameOver");
+        AudioManager.instance?.Play("Wind");
     }
 }

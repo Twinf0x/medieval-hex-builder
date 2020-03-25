@@ -24,6 +24,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData data) 
     {
         StartCoroutine(SimpleAnimations.instance.Wobble(transform, 0.25f, 1, () => transform.localScale = Hand.instance.CardScale ));
+        AudioManager.instance?.Play("CardDraw");
     }
 
     public void PickFromHand() 
