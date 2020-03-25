@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
+public enum SoundType { MUSIC, SFX }
+
 [System.Serializable]
 public class Sound
 {
@@ -11,6 +13,7 @@ public class Sound
     [Range(0.1f, 3f)]
     public float pitch = 1;
     public bool loop;
+    public SoundType type;
 
     [HideInInspector]
     public AudioSource source;

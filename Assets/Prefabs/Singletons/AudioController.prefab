@@ -49,46 +49,61 @@ MonoBehaviour:
     volume: 0.2
     pitch: 1
     loop: 1
+    type: 0
     source: {fileID: 0}
   - name: Coins
     clip: {fileID: 8300000, guid: 0f42526d889432b44adf3caa02549a4d, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    type: 1
     source: {fileID: 0}
   - name: CardDraw
     clip: {fileID: 8300000, guid: 45f1487908f42d14ea746156ef241641, type: 3}
     volume: 0.5
     pitch: 2.5
     loop: 0
+    type: 1
     source: {fileID: 0}
   - name: Build
     clip: {fileID: 8300000, guid: a0b953152bb66864fb17c5f3c4ce180a, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    type: 1
     source: {fileID: 0}
   - name: LevelUp
     clip: {fileID: 8300000, guid: e577dbe36dde5b54fb3e00bf578088ba, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    type: 1
     source: {fileID: 0}
   - name: GameOver
     clip: {fileID: 8300000, guid: c7fa591aa65deff48918cf40a3976881, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    type: 1
     source: {fileID: 0}
   - name: Wind
     clip: {fileID: 8300000, guid: 47ecbf457c8f25246a103cae0a5327ec, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
+    type: 0
     source: {fileID: 0}
   - name: GameTheme
     clip: {fileID: 8300000, guid: dba4f8f77fbc7634793037ca42341040, type: 3}
     volume: 0.2
     pitch: 1
     loop: 1
+    type: 0
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: f1e128e63c0f0c44cb939466d2d47e86, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    type: 1
     source: {fileID: 0}

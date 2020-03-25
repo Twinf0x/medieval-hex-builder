@@ -8,9 +8,10 @@ public class PlacementController : MonoBehaviour
     public static PlacementController instance;
 
     public Vector3 selectedCardOffset;
-
     private Card selectedCard = null;
     private bool justPickedUpACard = false;
+
+    public GameObject pauseMenuParent;
 
     private void Awake() 
     {
@@ -27,6 +28,7 @@ public class PlacementController : MonoBehaviour
     private void Update()
     {
         CheckMouseActivity();
+
         if(selectedCard != null)
         {
             PlaceCardNextToCursor(selectedCard);
