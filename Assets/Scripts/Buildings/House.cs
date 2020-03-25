@@ -27,6 +27,10 @@ public class House : Building
         if(this.locationTile == null)
         {
             total += bonusPerHouse;
+            if(tile.placedBuilding != null && tile.placedBuilding is House)
+            {
+                total -= bonusPerHouse;
+            }
         }
 
         return total;
