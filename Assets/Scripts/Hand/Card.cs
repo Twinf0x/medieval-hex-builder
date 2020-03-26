@@ -26,13 +26,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         StartCoroutine(SimpleAnimations.instance.Wobble(transform, 0.25f, 1, () => transform.localScale = Hand.instance.CardScale ));
         AudioManager.instance?.Play("CardDraw");
         UIManager.instance?.ShowBuildingDescription(building, false);
-        Debug.Log("Pointer enters");
     }
 
     public void OnPointerExit(PointerEventData data)
     {
         UIManager.instance?.HideBuildingDescription();
-        Debug.Log("Pointer exits");
     }
 
     public void PickFromHand() 
