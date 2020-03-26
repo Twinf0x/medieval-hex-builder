@@ -35,6 +35,14 @@ public class CameraController : MonoBehaviour
             SetLimits(desiredSize);
         }
     }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+        {
+            instance = null;
+        }
+    }
 	
 	private void Update ()
     {
