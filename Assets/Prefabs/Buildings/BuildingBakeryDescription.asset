@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingBakeryDescription
   m_EditorClassIdentifier: 
   title: Bakery
-  description: Doubles production of Mills within 2 Tiles
+  description: Makes delicious bread from flour

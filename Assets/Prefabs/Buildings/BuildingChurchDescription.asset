@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BuildingChurchDescription
   m_EditorClassIdentifier: 
   title: Church
-  description: Doubles the production of Houses and Mansions within 2 Tiles; -15G
-    per Market in Range
+  description: Often in the middle of settlements; doesn't really get along with
+    markets

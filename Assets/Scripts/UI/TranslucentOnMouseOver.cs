@@ -10,6 +10,11 @@ public class TranslucentOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPoin
     [Range(0f, 1f)] public float normalAlpha = 1;
     [Range(0f, 1f)] public float mouseOverAlpha = 0.5f;
 
+    private void OnDisable()
+    {
+        OnPointerExit(null);
+    }
+
     public void OnPointerEnter(PointerEventData data) 
     {
         Color color = targetImage.color;

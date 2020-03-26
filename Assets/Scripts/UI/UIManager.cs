@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         tileDescription.Hide();
     }
 
-    public void ShowBuildingDescription(Building building) 
+    public void ShowBuildingDescription(Building building, bool includeProduction = true) 
     {
         if(building.descriptionData == null) 
         {
@@ -45,8 +45,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        buildingDescription.Show();
-        buildingDescription.SetData(building);
+        buildingDescription.Show(building, includeProduction);
     }
 
     public void HideBuildingDescription() 

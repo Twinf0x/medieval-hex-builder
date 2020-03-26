@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingMansionDescription
   m_EditorClassIdentifier: 
   title: Mansion
-  description: Produces 12G for every house in 2 tile range
+  description: Turn a simple home into a family estate

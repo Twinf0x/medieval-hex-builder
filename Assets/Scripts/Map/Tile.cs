@@ -29,23 +29,24 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        hoverMarker.SetActive(true);
         if(!Helpers.IsMouseOverUI())
         {
+            hoverMarker.SetActive(true);
             UIManager.instance?.ShowTileDescription(descriptionData);
-        }
-        else
-        {
-            UIManager.instance?.HideTileDescription();
-        }
 
-        if(placedBuilding != null) 
-        {
-            UIManager.instance?.ShowBuildingDescription(placedBuilding);
+            if(placedBuilding != null) 
+            {
+                UIManager.instance?.ShowBuildingDescription(placedBuilding);
+            }
+            else
+            {
+                UIManager.instance?.HideBuildingDescription();
+            }
         }
         else
         {
-            UIManager.instance?.HideBuildingDescription();
+            hoverMarker.SetActive(false);
+            UIManager.instance?.HideTileDescription();
         }
 
         PlacementController.instance?.UpdateCardProduction(this);

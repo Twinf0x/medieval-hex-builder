@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingWoodcutterDescription
   m_EditorClassIdentifier: 
   title: Lumberjack
-  description: Produces 1G for every forest in 1 tile range
+  description: Cuts logs out of nearby trees

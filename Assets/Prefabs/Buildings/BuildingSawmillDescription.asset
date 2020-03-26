@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingSawmillDescription
   m_EditorClassIdentifier: 
   title: Sawmill
-  description: Doubles production of Woodcutters within 2 tiles range
+  description: Turns the logs from nearby lumberjacks into planks

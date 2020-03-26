@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingFieldDescription
   m_EditorClassIdentifier: 
   title: Field
-  description: Produces 1G
+  description: A beatiful field of golden wheat

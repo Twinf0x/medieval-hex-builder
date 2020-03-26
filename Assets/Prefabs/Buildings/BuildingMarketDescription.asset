@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BuildingMarketDescription
   m_EditorClassIdentifier: 
   title: Market
-  description: Doubles the production of Houses and Mansions within 2 Tiles; -15G
-    per Chruch in Range
+  description: Often in the middle of settlements; doesn't really get along with
+    the church

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingFarmDescription
   m_EditorClassIdentifier: 
   title: Farm
-  description: Produces 3G
+  description: Upgrades fields to produce more wheat

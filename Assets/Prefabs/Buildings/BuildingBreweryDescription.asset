@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingBreweryDescription
   m_EditorClassIdentifier: 
   title: Brewery
-  description: 7G per Field within 2 Tiles; -10G per Mill within 2 Tiles
+  description: The best thing that can happen to wheat

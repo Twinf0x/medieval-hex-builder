@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingQuarryDescription
   m_EditorClassIdentifier: 
   title: Quarry
-  description: Produces 1G for every mountain in 1 tile range
+  description: All those mountains have to be good for something, right?

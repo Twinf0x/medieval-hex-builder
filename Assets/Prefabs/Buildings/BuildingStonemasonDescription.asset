@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingStonemasonDescription
   m_EditorClassIdentifier: 
   title: Stonemason
-  description: Doubles production of Quarries within 2 tiles range
+  description: Turns stone from nearby Quarries into blocks

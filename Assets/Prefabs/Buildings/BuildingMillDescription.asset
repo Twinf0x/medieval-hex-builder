@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: BuildingMillDescription
   m_EditorClassIdentifier: 
   title: Mill
-  description: Produces +3G per Field, +5G per Farm and -6G per Brewery within 2
-    Tiles
+  description: Turns wheat from nearby fields into flour

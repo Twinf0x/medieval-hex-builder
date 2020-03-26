@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildingHouseDescription
   m_EditorClassIdentifier: 
   title: House
-  description: Produces 6G for every house in 1 tile range
+  description: The home of a family looking for community
