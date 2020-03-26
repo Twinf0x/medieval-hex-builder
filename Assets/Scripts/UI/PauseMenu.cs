@@ -56,8 +56,6 @@ public class PauseMenu : MonoBehaviour
     public void ShowPauseMenu()
     {
         pauseMenuParent.SetActive(true);
-
-        //Drop menu into screen
         StartCoroutine(SimpleAnimations.instance.Translate(pauseMenuPanel, panelDropDuration, new Vector3(0f, -1 * panelDropHeight, 0f)));
     }
 

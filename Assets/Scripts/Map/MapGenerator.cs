@@ -25,7 +25,9 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Camera Restrictions")]
     public float paddingAroundIsland = 2f;
+
     [Header("Animation")]
+    public bool animateMapCreation = true;
     public float animationDuration = 2f;
     public float dropDuration = 1.5f;
 
@@ -45,15 +47,18 @@ public class MapGenerator : MonoBehaviour
     {
         viewPortOffset = CalculateViewportOffset(ySize, paddingAroundIsland);
         Vector2 mapSize = CalculateMapSizeForCamera(xSize, ySize, zSize, paddingAroundIsland);
-        CameraController.instance.SetMapSize(mapSize);
-        CameraController.instance.CenterCamera(viewPortOffset);
+        CameraController.instance?.SetMapSize(mapSize);
+        CameraController.instance?.CenterCamera(viewPortOffset);
 
         Map oceanMap = CreateOcean();
         oceanMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
 
         Map islandMap = CreateMap(xSize, ySize, zSize, grasslandPrefab);
         AddMapFeatures(islandMap);
-        StartCoroutine(AnimateMapCreation(islandMap, animationDuration));
+        if(animateMapCreation)
+        {
+            StartCoroutine(AnimateMapCreation(islandMap, animationDuration));
+        }
         islandMap.transform.Translate(viewPortOffset.x, viewPortOffset.y, 0);
     }
 
