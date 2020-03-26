@@ -20,16 +20,28 @@ public class MainMenu : MonoBehaviour
     public Sprite sfxOn;
     public Sprite sfxOff;
 
+    [Header("How to play")]
+    public GameObject tutorialParent;
+    public Transform tutorialPanel;
+    public float panelDropDuration;
+    public float panelDropHeight;
+    public Button openTutorialButton;
+    public Button closeTutorialButton;
+
     private void Start()
     {
         toggleMusicButton.onClick.AddListener(() => ToggleMusic());
         toggleSfxButton.onClick.AddListener(() => ToggleSfx());
+        openTutorialButton.onClick.AddListener(() => OpenTutorial());
+        closeTutorialButton.onClick.AddListener(() => CloseTutorial());
 
         UpdateMusicButton();
         UpdateSfxButton();
 
         AudioManager.instance?.StopAll();
         AudioManager.instance?.Play("MenuTheme");
+
+        tutorialParent.SetActive(false);
     }
 
     public void OpenGameScene() {
@@ -71,5 +83,16 @@ public class MainMenu : MonoBehaviour
         {
             sfxButtonImage.sprite = sfxOff;
         }
+    }
+
+    private void OpenTutorial()
+    {
+        tutorialParent.SetActive(true);
+        StartCoroutine(SimpleAnimations.instance.Translate(tutorialPanel, panelDropDuration, new Vector3(0f, -1 * panelDropHeight, 0f)));
+    }
+
+    private void CloseTutorial()
+    {
+        StartCoroutine(SimpleAnimations.instance.Translate(tutorialPanel, panelDropDuration, new Vector3(0f, panelDropHeight, 0f), 1f, () => tutorialParent.SetActive(false)));
     }
 }
