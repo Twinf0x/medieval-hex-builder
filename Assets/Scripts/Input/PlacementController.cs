@@ -11,7 +11,7 @@ public class PlacementController : MonoBehaviour
     private Card selectedCard = null;
     private bool justPickedUpACard = false;
 
-    public GameObject pauseMenuParent;
+    public GameObject smokeEffectPrefab;
 
     private void Awake() 
     {
@@ -91,6 +91,7 @@ public class PlacementController : MonoBehaviour
         
         tile.PlaceBuilding(building);
         AudioManager.instance?.Play("Build");
+        Instantiate(smokeEffectPrefab, building.gameObject.transform.position, Quaternion.identity);
 
         foreach(Building tempBuilding in Treasury.instance.allPlacedBuildings)
         {

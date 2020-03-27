@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseThreshold: 10
   growthFactorOne: 0.7
-  growthFactorTwo: 0.25
+  growthFactorTwo: 0.22
   defaultTimeBetweenCollections: 0.25
   maxMoneyCollectionDuration: 2.5
   levelProgressBar: {fileID: 0}
@@ -54,6 +54,10 @@ MonoBehaviour:
   levelText: {fileID: 0}
   gameOverScreen: {fileID: 0}
   gameOverMoneyText: {fileID: 0}
+  collectEffectPrefab: {fileID: 5868874426264499837, guid: 79e437fe595c5e34a97ba96122d64338,
+    type: 3}
+  levelUpEffectPrefab: {fileID: 966254142571629934, guid: 1000115a6ea1e7a4fbfbbd8ff8108521,
+    type: 3}
   nextThreshold: 0
   previousThreshold: 0
   currentMoney: 0

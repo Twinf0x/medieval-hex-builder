@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbc84fbffb338b408f71cc35791c5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedCardOffset: {x: 0, y: 0, z: 0}
+  smokeEffectPrefab: {fileID: 4608397293752599462, guid: 2eea8d6926c68e74f9b806adbe36ee1c,
+    type: 3}

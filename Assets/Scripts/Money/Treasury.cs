@@ -16,12 +16,16 @@ public class Treasury : MonoBehaviour
     public float defaultTimeBetweenCollections = 0.25f;
     public float maxMoneyCollectionDuration = 2.5f;
     public Slider levelProgressBar;
+    public Transform treasureChest;
     public Transform moneyIndicator;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI levelText;
 
     public GameObject gameOverScreen;
     public TextMeshProUGUI gameOverMoneyText;
+
+    public GameObject collectEffectPrefab;
+    public GameObject levelUpEffectPrefab;
 
 
     [Header("Set during play, Visible for Debug")]
@@ -32,6 +36,7 @@ public class Treasury : MonoBehaviour
     public List<Building> allPlacedBuildings = new List<Building>();
 
     private Vector3 indicatorScale;
+    private Vector3 treasureChestScale;
 
     private void Awake()
     {
@@ -44,6 +49,7 @@ public class Treasury : MonoBehaviour
             instance = this;
             levelProgressBar.value = currentMoney;
             indicatorScale = moneyIndicator.localScale;
+            treasureChestScale = treasureChest.localScale;
             NextLevel();
         }
     }
@@ -125,6 +131,10 @@ public class Treasury : MonoBehaviour
         if(currentLevel > 1)
         {
             AudioManager.instance?.Play("LevelUp");
+            StartCoroutine(SimpleAnimations.instance.Wobble(treasureChest, 0.5f, 1.25f, () => treasureChest.localScale = treasureChestScale));
+            Vector3 position = Camera.main.ScreenToWorldPoint(levelText.transform.position);
+            position.z = -1 * Camera.main.transform.position.z;
+            Instantiate(levelUpEffectPrefab, position, Quaternion.identity, Camera.main.transform);
             Deck.instance.DrawToHand();
         }
     }

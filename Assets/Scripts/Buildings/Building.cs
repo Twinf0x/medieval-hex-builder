@@ -48,6 +48,8 @@ public class Building : MonoBehaviour
         GameObject popUpObject = Instantiate(popUpPrefab, transform.position, Quaternion.identity, transform);
         NumberPopUp popUp = popUpObject.GetComponent<NumberPopUp>();
         popUp.text.text = production.ToString();
+        
+        Instantiate(Treasury.instance.collectEffectPrefab, transform.position, Quaternion.identity);
 
         Treasury.instance.AddMoney(production);
     }

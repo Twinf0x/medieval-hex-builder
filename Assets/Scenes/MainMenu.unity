@@ -997,7 +997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'When you have no buildings left to place it is game over.
+  m_text: 'When you have nothing left to build it is game over.
 
     And that''s
     about it. Happy Highscore Hunting!'
