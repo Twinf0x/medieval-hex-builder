@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: BuildingChurchDescription
   m_EditorClassIdentifier: 
   title: Church
-  description: Often in the middle of settlements; doesn't really get along with
-    markets
+  description: Often in the middle of settlements; keep away from markets
