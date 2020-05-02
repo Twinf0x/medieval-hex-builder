@@ -20,13 +20,21 @@ public class MainMenu : MonoBehaviour
     public Sprite sfxOn;
     public Sprite sfxOff;
 
+    [Header("Modal Settings")]
+    public float panelDropDuration;
+    public float panelDropHeight;
+
     [Header("How to play")]
     public GameObject tutorialParent;
     public Transform tutorialPanel;
-    public float panelDropDuration;
-    public float panelDropHeight;
     public Button openTutorialButton;
     public Button closeTutorialButton;
+
+    [Header("Leaderboard")]
+    public GameObject leaderboardParent;
+    public Transform leaderboardPanel;
+    public Button openLeaderboardButton;
+    public Button closeLeaderboardButton;
 
     private void Start()
     {
@@ -34,6 +42,8 @@ public class MainMenu : MonoBehaviour
         toggleSfxButton.onClick.AddListener(() => ToggleSfx());
         openTutorialButton.onClick.AddListener(() => OpenTutorial());
         closeTutorialButton.onClick.AddListener(() => CloseTutorial());
+        openLeaderboardButton.onClick.AddListener(() => OpenLeaderboard());
+        closeLeaderboardButton.onClick.AddListener(() => CloseLeaderboard());
 
         UpdateMusicButton();
         UpdateSfxButton();
@@ -42,6 +52,7 @@ public class MainMenu : MonoBehaviour
         AudioManager.instance?.Play("MenuTheme");
 
         tutorialParent.SetActive(false);
+        leaderboardParent.SetActive(false);
     }
 
     public void OpenGameScene() {
@@ -94,5 +105,17 @@ public class MainMenu : MonoBehaviour
     private void CloseTutorial()
     {
         StartCoroutine(SimpleAnimations.instance.Translate(tutorialPanel, panelDropDuration, new Vector3(0f, panelDropHeight, 0f), 1f, () => tutorialParent.SetActive(false)));
+    }
+
+    private void OpenLeaderboard()
+    {
+        leaderboardParent.SetActive(true);
+        StartCoroutine(SimpleAnimations.instance.Translate(leaderboardPanel, panelDropDuration, new Vector3(0f, -1 * panelDropHeight, 0f)));
+        leaderboardParent.GetComponent<LeaderboardController>().ResetLeaderboard();
+    }
+
+    private void CloseLeaderboard()
+    {
+        StartCoroutine(SimpleAnimations.instance.Translate(leaderboardPanel, panelDropDuration, new Vector3(0f, panelDropHeight, 0f), 1f, () => leaderboardParent.SetActive(false)));
     }
 }

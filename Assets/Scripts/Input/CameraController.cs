@@ -53,19 +53,19 @@ public class CameraController : MonoBehaviour
 
         var pos = transform.position;
         
-        if(Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y > Screen.height - borderThickness)
+        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.mousePosition.y > Screen.height - borderThickness)
         {
             pos.y += panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y < borderThickness)
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.mousePosition.y < borderThickness)
         {
             pos.y -= panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x > Screen.width - borderThickness)
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.mousePosition.x > Screen.width - borderThickness)
         {
             pos.x += panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x < borderThickness)
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.mousePosition.x < borderThickness)
         {
             pos.x -= panSpeed * Time.deltaTime;
         }
