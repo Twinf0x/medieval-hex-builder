@@ -92,7 +92,7 @@ public class RestConnector : DatabaseConnector
 
     public override void PostSingleScore(SingleScoreData score, Action callback)
     {
-        RestClient.Put($"{databaseURL}scores.json?auth={currentLoginData.idToken}", score)
+        RestClient.Post($"{databaseURL}scores.json?auth={currentLoginData.idToken}", score)
             .Then(response => 
             {
                 if(response.StatusCode == 200)
@@ -117,7 +117,7 @@ public class RestConnector : DatabaseConnector
                 if(response.StatusCode == 200)
                 {
                     //rather ugly work around as Unity's built in json utility can't deserialize json arrays
-                    var json = "{\"scores\":" + response.Text + "}";
+                    var json = "{\"scores\":" + formatScoreResponse(response.Text) + "}";
                     var scores = JsonUtility.FromJson<ScoreCollection>(json);
                     callback(scores);
                 }
@@ -129,5 +129,31 @@ public class RestConnector : DatabaseConnector
                     });
                 }
             });
+    }
+
+    private string formatScoreResponse(string responseText)
+    {
+        responseText = responseText.Remove(0, 1);
+
+        var scoreObjects = responseText.Split('}');
+        string result = "";
+        foreach (string scoreObject in scoreObjects)
+        {
+            if(string.IsNullOrEmpty(scoreObject))
+            {
+                continue;
+            }
+
+            if(result.Length > 0)
+            {
+                result += ',';
+            }
+
+            var objectValue  = scoreObject.Substring(scoreObject.IndexOf('{'));
+
+            result +=  objectValue + "}";
+        }
+
+        return $"[{result}]";
     }
 }

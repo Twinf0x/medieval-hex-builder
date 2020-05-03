@@ -21,8 +21,10 @@ public class Treasury : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI levelText;
 
+    [Header("Game Over")]
     public GameObject gameOverScreen;
     public TextMeshProUGUI gameOverMoneyText;
+    public TextMeshProUGUI gameOverLevelText;
 
     public GameObject collectEffectPrefab;
     public GameObject levelUpEffectPrefab;
@@ -147,7 +149,9 @@ public class Treasury : MonoBehaviour
 
     private void Lose()
     {
+        var moneyForNextLevel = nextThreshold - currentMoney;
         gameOverMoneyText.text = $"You earned {currentMoney.ToString()} Gold!";
+        gameOverLevelText.text = $"Only {moneyForNextLevel.ToString()} more for Level {(currentLevel+1).ToString()}!";
         gameOverScreen.SetActive(true);
         AudioManager.instance?.Stop("GameTheme");
         AudioManager.instance?.Play("GameOver");
