@@ -8,7 +8,16 @@ using UnityEngine.UI;
 public class SubmitScoreDialog : MonoBehaviour
 {
     public TMP_InputField usernameInput;
+    public TextMeshProUGUI usernameText;
+    public Color inputActiveColor;
+    public Color inputDisabledColor;
     public Button submitButton;
+    public GameObject submitButtonText;
+    public Image uploadStatusImage;
+
+    public Sprite uploadOngoing;
+    public Sprite uploadSuccessful;
+    public Sprite uploadFailed;
 
     private DatabaseConnector connector;
     private LoginData loginData;
@@ -59,10 +68,15 @@ public class SubmitScoreDialog : MonoBehaviour
             //TODO indicate invalid username
             return;
         }
+
+        uploadStatusImage.sprite = uploadOngoing;
+        uploadStatusImage.gameObject.SetActive(true);
+        submitButtonText.SetActive(false);
         
         SetupNewUser(username, SubmitCurrentScore);
         submitButton.interactable = false;
         usernameInput.interactable = false;
+        usernameText.color = inputDisabledColor;
     }
 
     public void SetupNewUser(string username, Action callback)
@@ -85,6 +99,31 @@ public class SubmitScoreDialog : MonoBehaviour
 
     private void SubmitScore(SingleScoreData data)
     {
-        connector.PostSingleScore(data, () => Debug.Log("Submitted score"));
+        connector.PostSingleScore(data, OnScoreSuccessfullySubmitted, OnScoreSubmissionFailed);
+    }
+
+    private void OnScoreSuccessfullySubmitted()
+    {
+        uploadStatusImage.sprite = uploadSuccessful;
+    }
+
+    private void OnScoreSubmissionFailed()
+    {
+        uploadStatusImage.sprite = uploadFailed;
+        
+        StartCoroutine(ResetAfterSeconds(2f));
+    }
+
+    private IEnumerator ResetAfterSeconds(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        uploadStatusImage.gameObject.SetActive(false);
+        submitButtonText.SetActive(true);
+
+        usernameInput.text = string.Empty;
+        usernameInput.interactable = true;
+        usernameText.color = inputActiveColor;
+
     }
 }

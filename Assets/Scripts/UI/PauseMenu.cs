@@ -40,6 +40,11 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
+        if(Treasury.instance.gameOver)
+        {
+            return;
+        }
+        
         if(Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.P))
         {
             if(pauseMenuParent.activeInHierarchy)

@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
 	
 	private void Update ()
     {
-        if (!canMoveCamera)
+        if (!canMoveCamera || Treasury.instance.gameOver)
         {
             return;
         }

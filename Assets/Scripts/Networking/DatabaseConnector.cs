@@ -12,11 +12,11 @@ public abstract class DatabaseConnector
     internal static readonly string loginURL = $"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={apiKey}";
     internal static readonly string refreshURL = $"https://securetoken.googleapis.com/v1/token?key={apiKey}";
 
-    public abstract void PostUser(UserData user, Action callback);
-    public abstract void GetUser(string userId, Action<UserData> callback);
-    public abstract void LoginAnonymously(Action<LoginData> callback);
-    public abstract void RefreshLogin(string refreshToken, Action<LoginData> callback);
+    public abstract void PostUser(UserData user, Action onSuccess = null, Action onFailure = null);
+    public abstract void GetUser(string userId, Action<UserData> onSuccess = null, Action onFailure = null);
+    public abstract void LoginAnonymously(Action<LoginData> onSuccess = null, Action onFailure = null);
+    public abstract void RefreshLogin(string refreshToken, Action<LoginData> onSuccess = null, Action onFailure = null);
 
-    public abstract void PostSingleScore(SingleScoreData score, Action callback);
-    public abstract void GetTopScores(int amount, Action<ScoreCollection> callback);
+    public abstract void PostSingleScore(SingleScoreData score, Action onSuccess = null, Action onFailure = null);
+    public abstract void GetTopScores(int amount, Action<ScoreCollection> onSuccess = null, Action onFailure = null);
 }

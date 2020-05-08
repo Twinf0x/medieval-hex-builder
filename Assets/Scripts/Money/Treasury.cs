@@ -31,6 +31,7 @@ public class Treasury : MonoBehaviour
 
 
     [Header("Set during play, Visible for Debug")]
+    public bool gameOver = true;
     public int nextThreshold = 0;
     public int previousThreshold = 0;
     public int currentMoney = 0;
@@ -60,6 +61,7 @@ public class Treasury : MonoBehaviour
     {
         AudioManager.instance?.StopAll();
         AudioManager.instance?.Play("GameTheme");
+        gameOver = false;
     }
 
     public void StartCollectingMoney()
@@ -149,6 +151,7 @@ public class Treasury : MonoBehaviour
 
     private void Lose()
     {
+        gameOver = true;
         var moneyForNextLevel = nextThreshold - currentMoney;
         gameOverMoneyText.text = $"You earned {currentMoney.ToString()} Gold!";
         gameOverLevelText.text = $"Only {moneyForNextLevel.ToString()} more for Level {(currentLevel+1).ToString()}!";

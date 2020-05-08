@@ -25,16 +25,16 @@ public class UIManager : MonoBehaviour
     {
         if(data == null) 
         {
-            tileDescription.Hide();
+            tileDescription?.Hide();
             return;
         }
-        tileDescription.Show();
-        tileDescription.SetData(data);
+        tileDescription?.Show();
+        tileDescription?.SetData(data);
     }
 
     public void HideTileDescription()
     {
-        tileDescription.Hide();
+        tileDescription?.Hide();
     }
 
     public void ShowBuildingDescription(Building building, bool includeProduction = true) 

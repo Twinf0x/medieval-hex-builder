@@ -43,11 +43,9 @@ public class LeaderboardController : MonoBehaviour
 
     public void DisplayLeaderboard(ScoreCollection scoreCollection)
     {
-        Debug.Log("DisplayLeaderboard - Sort List");
         var scoreDataList = new List<SingleScoreData>(scoreCollection.scores).Where(scoreData => scoreData != null);
         scoreDataList = scoreDataList.OrderByDescending(scoreData => scoreData.score);
 
-        Debug.Log("DisplayLeaderboard - Adding entries to leaderboard");
         foreach (SingleScoreData scoreData in scoreDataList)
         {
             var rank = rows.Count + 1;
@@ -59,7 +57,6 @@ public class LeaderboardController : MonoBehaviour
 
     public void AddRow(LeaderboardRowData rowData)
     {
-        Debug.Log("AddRow");
         var rowObject = Instantiate(rowPrefab, leaderboardContainer.position, Quaternion.identity, leaderboardContainer);
         var yPosition = -1 * (rowData.rank - 1) * rowHeight;
         rowObject.transform.Translate(new Vector3(0f, yPosition, 0f));
