@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour
     public int zSize = 0;
 
     [Header("Ocean")]
-    public int oceanOffset = 3;
+    public int oceanOffset = 9;
 
     [Header("Forests")]
     public int numberOfForests = 3;

@@ -46,7 +46,7 @@ MonoBehaviour:
   xSize: 8
   ySize: 8
   zSize: 8
-  oceanOffset: 8
+  oceanOffset: 9
   numberOfForests: 3
   maxForestSize: 12
   minForestSize: 7
@@ -54,6 +54,9 @@ MonoBehaviour:
   maxMountainrangeSize: 9
   minMountainrangeSize: 6
   paddingAroundIsland: 1
+  animateMapCreation: 1
+  animationDuration: 2
+  dropDuration: 1.5
   grasslandPrefab: {fileID: 7177012790920355997, guid: a8d9eab4940e11c40940cce9a47cc987,
     type: 3}
   forestPrefab: {fileID: 7177012790920355997, guid: a4902f685152d134a98c9b01f1ffda05,
@@ -64,3 +67,4 @@ MonoBehaviour:
     type: 3}
   mapPrefab: {fileID: 1532768791067977172, guid: 4d8032f74076bf741bada8a62c6137fa,
     type: 3}
+  viewPortOffset: {x: 0, y: 0}

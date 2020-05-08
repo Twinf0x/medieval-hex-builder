@@ -156,8 +156,8 @@ public class CameraController : MonoBehaviour
     {
         var camOffsetY = orthographicSize;
         var camOffsetX = (camOffsetY / 9f) * 16f;
-        Vector2 yLimits = new Vector2(camOffsetY, mapSize.y - camOffsetY);
-        Vector2 xLimits = new Vector2(camOffsetX, mapSize.x - camOffsetX);
+        Vector2 yLimits = new Vector2(camOffsetY, mapSize.y - camOffsetY + 1);
+        Vector2 xLimits = new Vector2(camOffsetX, mapSize.x - camOffsetX + 1);
 
         xAxisLimits = xLimits;
         yAxisLimits = yLimits;
