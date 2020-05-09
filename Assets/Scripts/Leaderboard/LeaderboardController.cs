@@ -33,6 +33,8 @@ public class LeaderboardController : MonoBehaviour
         {
             Destroy(row.gameObject);
         }
+
+        rows = new List<LeaderboardRow>(); 
     }
 
     public void LoadLeaderboard()
