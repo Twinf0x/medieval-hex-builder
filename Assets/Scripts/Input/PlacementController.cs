@@ -13,6 +13,11 @@ public class PlacementController : MonoBehaviour
 
     public GameObject smokeEffectPrefab;
 
+    [Header("Marker colors")]
+    public Color defaultColor;
+    public Color validColor;
+    public Color invalidColor;
+
     private void Awake() 
     {
         if(instance != null && instance != this)
@@ -183,6 +188,40 @@ public class PlacementController : MonoBehaviour
             }
 
             building.IndicateProductionChanges(potentialNewBuilding, hoverTile);
+        }
+    }
+
+    public Color GetMarkerColor(Tile hoverTile)
+    {
+        if(selectedCard == null)
+        {
+            return defaultColor;
+        }
+
+        if(selectedCard.MeetsPlacementRestriction(hoverTile))
+        {
+            return validColor;
+        }
+        else
+        {
+            return invalidColor;
+        }
+    }
+
+    public void UpdateInvalidTileIndicator(Tile hoverTile)
+    {
+        if(selectedCard == null)
+        {
+            return;
+        }
+
+        if(selectedCard.MeetsPlacementRestriction(hoverTile))
+        {
+            selectedCard.HideInvalidTileIndicator();
+        }
+        else
+        {
+            selectedCard.ShowInvalidTileIndicator();
         }
     }
 }

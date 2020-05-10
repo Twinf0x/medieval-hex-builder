@@ -46,3 +46,6 @@ MonoBehaviour:
   selectedCardOffset: {x: 0, y: 0, z: 0}
   smokeEffectPrefab: {fileID: 4608397293752599462, guid: 2eea8d6926c68e74f9b806adbe36ee1c,
     type: 3}
+  defaultColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+  validColor: {r: 0.3571024, g: 0.8396226, b: 0.18218225, a: 1}
+  invalidColor: {r: 0.6132076, g: 0.07953226, b: 0.06363475, a: 1}

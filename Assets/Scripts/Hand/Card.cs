@@ -11,6 +11,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI displayText;
     public TextMeshProUGUI productionText;
     public PlacementRestriction restriction;
+    public GameObject invalidTileIndicator;
 
     private Building building;
 
@@ -64,5 +65,15 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void ShowProductionPreview()
     {
         productionText.gameObject.SetActive(true);
+    }
+
+    public void ShowInvalidTileIndicator()
+    {
+        invalidTileIndicator.SetActive(true);
+    }
+
+    public void HideInvalidTileIndicator()
+    {
+        invalidTileIndicator.SetActive(false);
     }
 }

@@ -19,12 +19,19 @@ public class Tile : MonoBehaviour
     public Building placedBuilding = null;
     public bool RepresentsHand { get { return type == TileType.Hand; } }
 
+    private SpriteRenderer hoverMarkerRenderer;
+
     public bool IsOccupied
     {
         get
         {
             return placedBuilding != null;
         }
+    }
+
+    private void Awake()
+    {
+        hoverMarkerRenderer = hoverMarker.GetComponent<SpriteRenderer>();
     }
 
     private void OnMouseEnter()
@@ -51,6 +58,8 @@ public class Tile : MonoBehaviour
 
         PlacementController.instance?.UpdateCardProduction(this);
         PlacementController.instance?.IndicateProductionChanges(this);
+        PlacementController.instance?.UpdateInvalidTileIndicator(this);
+        hoverMarkerRenderer.color = PlacementController.instance != null ? PlacementController.instance.GetMarkerColor(this) : hoverMarkerRenderer.color;
     }
 
     private void OnMouseExit()

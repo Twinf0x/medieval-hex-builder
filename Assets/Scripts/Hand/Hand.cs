@@ -36,6 +36,7 @@ public class Hand : MonoBehaviour
 
     public void AddCard(Card card)
     {
+        card.HideInvalidTileIndicator();
         card.transform.SetParent(transform);
         cardsInHand.Add(card);
         AudioManager.instance?.Play("CardDraw");
