@@ -52,23 +52,9 @@ public class CameraController : MonoBehaviour
         }
 
         var pos = transform.position;
-        
-        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.mousePosition.y > Screen.height - borderThickness)
-        {
-            pos.y += panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.mousePosition.y < borderThickness)
-        {
-            pos.y -= panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.mousePosition.x > Screen.width - borderThickness)
-        {
-            pos.x += panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.mousePosition.x < borderThickness)
-        {
-            pos.x -= panSpeed * Time.deltaTime;
-        }
+
+        pos += CalculateCameraMovementDesktop();
+        pos += CalculateCameraMovementMobile();
 
         if(Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
@@ -84,6 +70,49 @@ public class CameraController : MonoBehaviour
 
         transform.position = pos;
 	}
+
+    private Vector3 CalculateCameraMovementMobile()
+    {
+        Vector3 delta = Vector3.zero;
+
+        if (TouchInput.instance.IsPanning)
+        {
+            var touch = Input.GetTouch(0);
+            var currentTouchPos = mainCamera.ScreenToWorldPoint(touch.position);
+            var previousTouchPos = mainCamera.ScreenToWorldPoint(touch.position- touch.deltaPosition);
+            var touchDelta = currentTouchPos - previousTouchPos;
+            delta.x += touchDelta.x;
+            delta.y = touchDelta.y;
+
+            delta *= -1;
+        }
+
+        return delta;
+    }
+
+    private Vector3 CalculateCameraMovementDesktop()
+    {
+        Vector3 delta = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.mousePosition.y > Screen.height - borderThickness)
+        {
+            delta.y += panSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.mousePosition.y < borderThickness)
+        {
+            delta.y -= panSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.mousePosition.x > Screen.width - borderThickness)
+        {
+            delta.x += panSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.mousePosition.x < borderThickness)
+        {
+            delta.x -= panSpeed * Time.deltaTime;
+        }
+
+        return delta;
+    }
 
     public void SetSizeRestrictions (Vector2 sizeRestrictions)
     {
