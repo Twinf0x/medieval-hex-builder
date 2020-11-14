@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f804fe07c9165f479e38c31a4a59020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomSensitivity: 0.2

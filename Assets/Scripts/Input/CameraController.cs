@@ -56,14 +56,8 @@ public class CameraController : MonoBehaviour
         pos += CalculateCameraMovementDesktop();
         pos += CalculateCameraMovementMobile();
 
-        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            ScrollIn();
-        }
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            ScrollOut();
-        }
+        ZoomDesktop();
+        ZoomMobile();
 
         pos.x = Mathf.Clamp(pos.x, xAxisLimits.x, xAxisLimits.y);
         pos.y = Mathf.Clamp(pos.y, yAxisLimits.x, yAxisLimits.y);
@@ -77,14 +71,10 @@ public class CameraController : MonoBehaviour
 
         if (TouchInput.instance.IsPanning)
         {
-            var touch = Input.GetTouch(0);
-            var currentTouchPos = mainCamera.ScreenToWorldPoint(touch.position);
-            var previousTouchPos = mainCamera.ScreenToWorldPoint(touch.position- touch.deltaPosition);
-            var touchDelta = currentTouchPos - previousTouchPos;
-            delta.x += touchDelta.x;
-            delta.y = touchDelta.y;
-
-            delta *= -1;
+            var worldPos = mainCamera.ScreenToWorldPoint(TouchInput.instance.PanPosition);
+            var oldWorldPos = mainCamera.ScreenToWorldPoint(TouchInput.instance.OldPanPosition);
+            var touchDelta = worldPos - oldWorldPos;
+            delta = touchDelta * -1;
         }
 
         return delta;
@@ -112,6 +102,29 @@ public class CameraController : MonoBehaviour
         }
 
         return delta;
+    }
+
+    private void ZoomMobile()
+    {
+        if (TouchInput.instance.IsPanning)
+        {
+            var desiredSize = mainCamera.orthographicSize + TouchInput.instance.ZoomDelta;
+            desiredSize = Mathf.Clamp(desiredSize, sizeRestrictions.x, sizeRestrictions.y);
+            SetLimits(desiredSize);
+            mainCamera.orthographicSize = desiredSize;
+        }
+    }
+
+    private void ZoomDesktop()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            ScrollIn();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            ScrollOut();
+        }
     }
 
     public void SetSizeRestrictions (Vector2 sizeRestrictions)
