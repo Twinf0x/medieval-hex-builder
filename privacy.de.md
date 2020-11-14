@@ -23,7 +23,7 @@ Link zu den Datenschutzrichtlinien von Drittanbietern, die von der App genutzt w
 
 Ich möchte Sie darüber informieren, dass ich immer, wenn Sie meinen Dienst nutzen, im Falle eines Fehlers in der App Daten und Informationen (durch Produkte von Drittanbietern) auf Ihrem Telefon sammle, die Logdaten genannt werden. Diese Protokolldaten können Informationen wie die Internet-Protokoll-Adresse ("IP-Adresse") Ihres Geräts, den Gerätenamen, die Betriebssystemversion, die Konfiguration der Anwendung bei der Nutzung meines Dienstes, die Uhrzeit und das Datum Ihrer Nutzung des Dienstes und andere Statistiken enthalten.
 
-**Kekse**
+**Cookies**
 
 Cookies sind Dateien mit einer kleinen Datenmenge, die häufig als anonyme eindeutige Identifizierungsmerkmale verwendet werden. Diese werden von den Websites, die Sie besuchen, an Ihren Browser gesendet und im internen Speicher Ihres Geräts gespeichert.
 
@@ -60,7 +60,7 @@ Diese Richtlinie ist gültig ab 2020-11-14
 
 **Kontaktieren Sie uns**
 
-Wenn Sie Fragen oder Anregungen zu meiner Datenschutzerklärung haben, zögern Sie nicht, mich unter markus+hexagon@zoppelt.net zu kontaktieren.
+Wenn Sie Fragen oder Anregungen zu meiner Datenschutzerklärung haben, zögern Sie nicht, mich unter contact@zoppelt.net zu kontaktieren.
 
 Diese Seite zum Datenschutz wurde unter [privacypolicytemplate.net](https://privacypolicytemplate.net) erstellt und von [App Privacy Policy Generator](https://app-privacy-policy-generator.nisrulz.com/) modifiziert/generiert.
 
