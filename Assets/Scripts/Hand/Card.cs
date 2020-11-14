@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,6 +13,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI productionText;
     public PlacementRestriction restriction;
     public GameObject invalidTileIndicator;
+    public Button clickHandler;
 
     private Building building;
 
@@ -37,6 +39,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void PickFromHand() 
     {
         PlacementController.instance.PickCardUp(this);
+        clickHandler.onClick.RemoveAllListeners();
+        clickHandler.onClick.AddListener(() => PlacementController.instance.TryPlacingSelectionOnLastClickedTile());
+        clickHandler.enabled = false;
         StartCoroutine(SimpleAnimations.instance.Stretch(transform, 0.25f, 1, () => transform.localScale = Hand.instance.CardScale ));
     }
 
@@ -75,5 +80,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void HideInvalidTileIndicator()
     {
         invalidTileIndicator.SetActive(false);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        transform.localScale = Hand.instance.CardScale;
     }
 }

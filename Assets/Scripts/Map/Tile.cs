@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum TileType {Ocean, Grassland, Forest, Mountain, Hand, None}
 
@@ -34,6 +35,7 @@ public class Tile : MonoBehaviour
         hoverMarkerRenderer = hoverMarker.GetComponent<SpriteRenderer>();
     }
 
+#if UNITY_STANDALONE
     private void OnMouseEnter()
     {
         if(!Helpers.IsMouseOverUI())
@@ -61,6 +63,22 @@ public class Tile : MonoBehaviour
         PlacementController.instance?.UpdateInvalidTileIndicator(this);
         hoverMarkerRenderer.color = PlacementController.instance != null ? PlacementController.instance.GetMarkerColor(this) : hoverMarkerRenderer.color;
     }
+#else
+    public void OnMouseEnter()
+    {
+        if (Helpers.IsMouseOverUI())
+        {
+            return;
+        }
+
+        hoverMarker.SetActive(true);
+        hoverMarkerRenderer.color = PlacementController.instance != null ? PlacementController.instance.GetMarkerColor(this) : hoverMarkerRenderer.color;
+        PlacementController.instance?.PlaceSelectedCardNextToTile(this);
+        PlacementController.instance?.UpdateCardProduction(this);
+        PlacementController.instance?.IndicateProductionChanges(this);
+        PlacementController.instance?.UpdateInvalidTileIndicator(this);
+    }
+#endif
 
     private void OnMouseExit()
     {

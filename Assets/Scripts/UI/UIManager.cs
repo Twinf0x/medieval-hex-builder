@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public bool IsBuildingDescriptionDisplayed
+    {
+        get { return buildingDescription.gameObject.activeInHierarchy; }
+    }
+
     public void ShowTileDescription(TileDescriptionData data) 
     {
         if(data == null) 

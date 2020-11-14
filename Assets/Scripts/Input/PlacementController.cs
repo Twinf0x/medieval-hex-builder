@@ -8,8 +8,11 @@ public class PlacementController : MonoBehaviour
     public static PlacementController instance;
 
     public Vector3 selectedCardOffset;
+    public float placementDelay = 0.05f;
     private Card selectedCard = null;
     private bool justPickedUpACard = false;
+    private Tile lastClickedTile = null;
+    private Coroutine clickTimer;
 
     public GameObject smokeEffectPrefab;
 
@@ -32,11 +35,40 @@ public class PlacementController : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_IOS
+        UpdateMobile();
+#elif UNITY_ANDROID
+        UpdateMobile();
+        #else
+        UpdateDesktop();
+        #endif
+    }
+
+    private void UpdateDesktop()
+    {
         CheckMouseActivity();
 
-        if(selectedCard != null)
+        if (selectedCard != null)
         {
             PlaceCardNextToCursor(selectedCard);
+        }
+    }
+
+    private void UpdateMobile()
+    {
+        if(selectedCard == null)
+        {
+            return;
+        }
+
+        if (!UIManager.instance.IsBuildingDescriptionDisplayed)
+        {
+            UIManager.instance.ShowBuildingDescription(selectedCard.buildingPrefab.GetComponent<Building>(), false);
+        }
+
+        if (TouchInput.instance.IsPanning)
+        {
+            selectedCard.Hide();
         }
     }
 
@@ -61,7 +93,7 @@ public class PlacementController : MonoBehaviour
         }
     }
 
-    private void TryPlacingSelection()
+    public void TryPlacingSelection()
     {
         if(selectedCard == null)
         {
@@ -76,12 +108,30 @@ public class PlacementController : MonoBehaviour
 
         if(selectedCard.MeetsPlacementRestriction(hoverTile))
         {
-            GameObject buildingObj = Instantiate(selectedCard.buildingPrefab);
-            Building building = buildingObj.GetComponent<Building>(); 
-            PlaceBuildingOnTile(building, hoverTile);
-            Destroy(selectedCard.gameObject);
-            selectedCard = null;
+            HandlePlacement(hoverTile);
         }
+    }
+
+    public void TryPlacingSelectionOnLastClickedTile()
+    {
+        if (selectedCard == null || lastClickedTile == null)
+        {
+            return;
+        }
+
+        if (selectedCard.MeetsPlacementRestriction(lastClickedTile))
+        {
+            HandlePlacement(lastClickedTile);
+        }
+    }
+
+    public void HandlePlacement(Tile hoverTile)
+    {
+        GameObject buildingObj = Instantiate(selectedCard.buildingPrefab);
+        Building building = buildingObj.GetComponent<Building>();
+        PlaceBuildingOnTile(building, hoverTile);
+        Destroy(selectedCard.gameObject);
+        selectedCard = null;
     }
 
     public void PlaceBuildingOnTile(Building building, Tile tile)
@@ -106,6 +156,11 @@ public class PlacementController : MonoBehaviour
 
     public void PickCardUp(Card card)
     {
+        if(card == selectedCard)
+        {
+            return;
+        }
+
         if(selectedCard != null)
         {
             PutCardBack();
@@ -114,6 +169,7 @@ public class PlacementController : MonoBehaviour
         Hand.instance.RemoveCard(card);
         selectedCard = card;
         card.ShowProductionPreview();
+        card.gameObject.SetActive(false);
         justPickedUpACard = true;
     }
 
@@ -157,6 +213,25 @@ public class PlacementController : MonoBehaviour
         Vector3 newPosition = mousePosition + selectedCardOffset;
 
         card.transform.position = newPosition;
+    }
+
+    public void PlaceSelectedCardNextToTile(Tile tile)
+    {
+        selectedCard.Show();
+        selectedCard.transform.position = Camera.main.WorldToScreenPoint(tile.transform.position) + selectedCardOffset;
+        if(clickTimer != null)
+        {
+            StopCoroutine(clickTimer);
+        }
+        clickTimer = StartCoroutine(EnablePlacementAfterSeconds(placementDelay));
+        lastClickedTile = tile;
+    }
+
+    private IEnumerator EnablePlacementAfterSeconds(float seconds)
+    {
+        selectedCard.clickHandler.enabled = false;
+        yield return new WaitForSeconds(seconds);
+        selectedCard.clickHandler.enabled = true;
     }
 
     public void UpdateCardProduction(Tile hoverTile)

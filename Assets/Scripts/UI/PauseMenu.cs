@@ -93,7 +93,7 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdateMusicButton()
     {
-        if((bool) AudioManager.instance?.IsMusicOn)
+        if(AudioManager.instance != null && AudioManager.instance.IsMusicOn)
         {
             musicButtonImage.sprite = musicOn;
             musicHeader.text = "Music On";
@@ -107,7 +107,7 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdateSfxButton()
     {
-        if((bool) AudioManager.instance?.AreSfxOn)
+        if(AudioManager.instance != null && AudioManager.instance.AreSfxOn)
         {
             sfxButtonImage.sprite = sfxOn;
             sfxHeader.text = "SFX On";

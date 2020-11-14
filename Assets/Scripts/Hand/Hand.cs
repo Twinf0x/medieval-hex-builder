@@ -39,6 +39,9 @@ public class Hand : MonoBehaviour
         card.HideInvalidTileIndicator();
         card.transform.SetParent(transform);
         cardsInHand.Add(card);
+        card.clickHandler.onClick.RemoveAllListeners();
+        card.clickHandler.onClick.AddListener(() => card.PickFromHand());
+        card.clickHandler.enabled = true;
         AudioManager.instance?.Play("CardDraw");
         ArrangeHand();
     }
