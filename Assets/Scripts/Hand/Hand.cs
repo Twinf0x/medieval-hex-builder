@@ -39,6 +39,7 @@ public class Hand : MonoBehaviour
         card.HideInvalidTileIndicator();
         card.HideValidTileIndicator();
         card.transform.SetParent(transform);
+        card.Show();
         cardsInHand.Add(card);
         card.clickHandler.onClick.RemoveAllListeners();
         card.clickHandler.onClick.AddListener(() => card.PickFromHand());
