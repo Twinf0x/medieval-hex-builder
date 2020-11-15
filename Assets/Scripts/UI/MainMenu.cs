@@ -36,6 +36,12 @@ public class MainMenu : MonoBehaviour
     public Button openLeaderboardButton;
     public Button closeLeaderboardButton;
 
+    [Header("About US")]
+    public GameObject aboutUsParent;
+    public Transform aboutUsPanel;
+    public Button openAboutUsButton;
+    public Button closeAboutUsButton;
+
     private void Start()
     {
         toggleMusicButton.onClick.AddListener(() => ToggleMusic());
@@ -44,6 +50,8 @@ public class MainMenu : MonoBehaviour
         closeTutorialButton.onClick.AddListener(() => CloseTutorial());
         openLeaderboardButton.onClick.AddListener(() => OpenLeaderboard());
         closeLeaderboardButton.onClick.AddListener(() => CloseLeaderboard());
+        openAboutUsButton.onClick.AddListener(() => OpenAboutUs());
+        closeAboutUsButton.onClick.AddListener(() => CloseAboutUs());
 
         UpdateMusicButton();
         UpdateSfxButton();
@@ -53,6 +61,7 @@ public class MainMenu : MonoBehaviour
 
         tutorialParent.SetActive(false);
         leaderboardParent.SetActive(false);
+        aboutUsParent.SetActive(false);
     }
 
     public void OpenGameScene() {
@@ -117,5 +126,21 @@ public class MainMenu : MonoBehaviour
     private void CloseLeaderboard()
     {
         StartCoroutine(SimpleAnimations.instance.Translate(leaderboardPanel, panelDropDuration, new Vector3(0f, panelDropHeight, 0f), 1f, () => leaderboardParent.SetActive(false)));
+    }
+
+    private void OpenAboutUs()
+    {
+        aboutUsParent.SetActive(true);
+        StartCoroutine(SimpleAnimations.instance.Translate(aboutUsPanel, panelDropDuration, new Vector3(0f, -1 * panelDropHeight, 0f)));
+    }
+
+    private void CloseAboutUs()
+    {
+        StartCoroutine(SimpleAnimations.instance.Translate(aboutUsPanel, panelDropDuration, new Vector3(0f, panelDropHeight, 0f), 1f, () => aboutUsParent.SetActive(false)));
+    }
+
+    public void OpenURL(string url)
+    {
+        Application.OpenURL(url);
     }
 }
