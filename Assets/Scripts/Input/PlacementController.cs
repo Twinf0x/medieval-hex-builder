@@ -293,10 +293,12 @@ public class PlacementController : MonoBehaviour
         if(selectedCard.MeetsPlacementRestriction(hoverTile))
         {
             selectedCard.HideInvalidTileIndicator();
+            selectedCard.ShowValidTileIndicator();
         }
         else
         {
             selectedCard.ShowInvalidTileIndicator();
+            selectedCard.HideValidTileIndicator();
         }
     }
 }

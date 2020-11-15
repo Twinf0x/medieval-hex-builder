@@ -37,6 +37,7 @@ public class Hand : MonoBehaviour
     public void AddCard(Card card)
     {
         card.HideInvalidTileIndicator();
+        card.HideValidTileIndicator();
         card.transform.SetParent(transform);
         cardsInHand.Add(card);
         card.clickHandler.onClick.RemoveAllListeners();

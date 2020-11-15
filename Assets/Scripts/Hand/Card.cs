@@ -13,6 +13,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI productionText;
     public PlacementRestriction restriction;
     public GameObject invalidTileIndicator;
+    public GameObject validTileIndicator;
     public Button clickHandler;
 
     private Building building;
@@ -80,6 +81,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void HideInvalidTileIndicator()
     {
         invalidTileIndicator.SetActive(false);
+    }
+
+    public void ShowValidTileIndicator()
+    {
+        validTileIndicator.SetActive(true);
+    }
+
+    public void HideValidTileIndicator()
+    {
+        validTileIndicator.SetActive(false);
     }
 
     public void Hide()
