@@ -14,6 +14,9 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Confirmation Dialog")]
     public GameObject confirmationDialogParent;
+    public TextMeshProUGUI confirmationTitle;
+    public Button confirmationButton;
+    public SceneManager sceneManager;
 
     [Header("Music Settings")]
     public Button toggleMusicButton;
@@ -28,6 +31,13 @@ public class PauseMenu : MonoBehaviour
     public TextMeshProUGUI sfxHeader;
     public Sprite sfxOn;
     public Sprite sfxOff;
+
+    [Header("Quick Restart")]
+    public Button quickRestartButton;
+    public string quickRestartTitle;
+
+    [Header("Back to Menu")]
+    public string backToMenuTitle;
 
     private void Awake()
     {
@@ -96,12 +106,10 @@ public class PauseMenu : MonoBehaviour
         if(AudioManager.instance != null && AudioManager.instance.IsMusicOn)
         {
             musicButtonImage.sprite = musicOn;
-            musicHeader.text = "Music On";
         }
         else
         {
             musicButtonImage.sprite = musicOff;
-            musicHeader.text = "Music Off";
         }
     }
 
@@ -110,12 +118,36 @@ public class PauseMenu : MonoBehaviour
         if(AudioManager.instance != null && AudioManager.instance.AreSfxOn)
         {
             sfxButtonImage.sprite = sfxOn;
-            sfxHeader.text = "SFX On";
         }
         else
         {
             sfxButtonImage.sprite = sfxOff;
-            sfxHeader.text = "SFX Off";
         }
+    }
+
+    public void BackToMenu()
+    {
+        confirmationButton.onClick.RemoveAllListeners();
+        confirmationButton.onClick.AddListener(() => GoBackToMenu());
+        confirmationTitle.text = backToMenuTitle;
+        ShowConfirmationDialog();
+    }
+
+    public void QuickRestart()
+    {
+        confirmationButton.onClick.RemoveAllListeners();
+        confirmationButton.onClick.AddListener(() => Restart());
+        confirmationTitle.text = quickRestartTitle;
+        ShowConfirmationDialog();
+    }
+
+    private void Restart()
+    {
+        sceneManager.LoadScene("SampleScene");
+    }
+
+    private void GoBackToMenu()
+    {
+        sceneManager.LoadScene("MainMenu");
     }
 }

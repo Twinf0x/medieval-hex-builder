@@ -217,6 +217,11 @@ public class PlacementController : MonoBehaviour
 
     public void PlaceSelectedCardNextToTile(Tile tile)
     {
+        if(selectedCard == null)
+        {
+            return;
+        }
+
         selectedCard.Show();
         selectedCard.transform.position = Camera.main.WorldToScreenPoint(tile.transform.position) + selectedCardOffset;
         if(clickTimer != null)
